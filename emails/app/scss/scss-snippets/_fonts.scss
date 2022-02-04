@@ -1,3 +1,27 @@
-@font-face {font-family: sfptb; src: url(../fonts/SFProText-Bold.ttf);}
-@font-face {font-family: sfptl; src: url(../fonts/SFProText-Light.ttf);}
-@font-face {font-family: sfptr; src: url(../fonts/SFProText-Regular.ttf);}
+// @font-face {font-family: sfptb; src: url(../fonts/SFProText-Bold.ttf);}
+// @font-face {font-family: sfptl; src: url(../fonts/SFProText-Light.ttf);}
+// @font-face {font-family: sfptr; src: url(../fonts/SFProText-Regular.ttf);}
+
+
+
+// https://fonts.cdnfonts.com/css/sf-pro-display
+@font-face {
+    font-family: 'sfptl';
+    font-style: normal;
+    font-weight: 100;
+    src: local('SF Pro Display'), url('https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYREGULAR.woff') format('woff');
+}
+@font-face {
+    font-family: 'sfptr';
+    font-style: normal;
+    font-weight: 500;
+    src: local('SF Pro Display'), url('https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYREGULAR.woff') format('woff');
+    // src: local('SF Pro Display'), url('https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYMEDIUM.woff') format('woff');
+}
+@font-face {
+    font-family: 'sfptb';
+    font-style: normal;
+    font-weight: 700;
+    src: local('SF Pro Display'), url('https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYREGULAR.woff') format('woff');
+    // src: local('SF Pro Display'), url('https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYBOLD.woff') format('woff');
+}

@@ -4,7 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bill</title>
-    <link rel="stylesheet" href="../css/bill.css">
+    <style>html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+* {
+  outline: none;
+}
+
+@font-face {
+  font-family: "sfptl";
+  font-style: normal;
+  font-weight: 100;
+  src: local("SF Pro Display"), url("https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYREGULAR.woff") format("woff");
+}
+@font-face {
+  font-family: "sfptr";
+  font-style: normal;
+  font-weight: 500;
+  src: local("SF Pro Display"), url("https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYREGULAR.woff") format("woff");
+}
+@font-face {
+  font-family: "sfptb";
+  font-style: normal;
+  font-weight: 700;
+  src: local("SF Pro Display"), url("https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYREGULAR.woff") format("woff");
+}
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.margin {
+  width: 100%;
+  height: 70px;
+}
+
+.btn-wrapper {
+  height: 100px;
+  position: relative;
+}
+.btn-wrapper > * {
+  left: 50%;
+  -webkit-transform: translate(-50%, 0);
+      -ms-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+    </style>
   </head>
   <body>
     <!-- ↓↓↓ MODULE: HEADER ↓↓↓-->
@@ -44,9 +141,8 @@
           </div>
           <div class="customer-info__col customer-info__col_transparent">
             <!-- ↓↓↓ MODULE: HEADER ↓↓↓-->
-            <style>.main-btn__wrapper{position:absolute;right:0;top:10px;width:267px}.main-btn__btn{width:267px;height:46px;border:1px solid #000;border-radius:6px;background-color:#000;color:#fff;font:20px sfptr;cursor:pointer}.main-btn__btn_success{border:1px solid #82bf64;background-color:#82bf64}.main-btn__btn_error{border:1px solid #ff6464;background-color:#ff6464}.main-btn__btn_cancel{border:1px solid #d8d8d8;background-color:#d8d8d8}.main-btn__additional{position:absolute;right:0px;top:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.main-btn__img{width:135px;margin:8px 0 2px}.main-btn__p{text-align:right;font:13px sfptr;color:#161616}</style>
-            <div class="main-btn__wrapper">
-              <button class="main-btn__btn" type="button">Переглянути</button>
+            <style>.main-btn__wrapper{position:absolute;right:0;top:10px;width:267px}.main-btn__btn{width:267px;height:46px;border:1px solid #000;border-radius:6px;background-color:#000;color:#fff;font:20px sfptr;cursor:pointer}.main-btn__btn_success{border:1px solid #82bf64;background-color:#82bf64}.main-btn__btn_error{border:1px solid #ff6464;background-color:#ff6464}.main-btn__btn_cancel{border:1px solid #d8d8d8;background-color:#d8d8d8}.main-btn__additional{position:absolute;right:0px;top:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.main-btn__img{width:135px;margin:8px 0 2px}.main-btn__p{text-align:right;font:13px sfptr;color:#161616}a.main-btn__btn{display:block;text-align:center;text-decoration:none;padding-top:10px}</style>
+            <div class="main-btn__wrapper"><a class="main-btn__btn" href="#">Переглянути</a>
               <div class="main-btn__additional"><img class="main-btn__img" alt="support" src="../img/e-support.jpg">
                 <p class="main-btn__p">*одна покупка різними картками</p>
               </div>
@@ -85,9 +181,8 @@
       <!-- ↑↑↑ /MODULE: HEADER ↑↑↑-->
       <div class="btn-wrapper">
         <!-- ↓↓↓ MODULE: HEADER ↓↓↓-->
-        <style>.main-btn__wrapper{position:absolute;right:0;top:10px;width:267px}.main-btn__btn{width:267px;height:46px;border:1px solid #000;border-radius:6px;background-color:#000;color:#fff;font:20px sfptr;cursor:pointer}.main-btn__btn_success{border:1px solid #82bf64;background-color:#82bf64}.main-btn__btn_error{border:1px solid #ff6464;background-color:#ff6464}.main-btn__btn_cancel{border:1px solid #d8d8d8;background-color:#d8d8d8}.main-btn__additional{position:absolute;right:0px;top:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.main-btn__img{width:135px;margin:8px 0 2px}.main-btn__p{text-align:right;font:13px sfptr;color:#161616}</style>
-        <div class="main-btn__wrapper">
-          <button class="main-btn__btn" type="button">Оплатити</button>
+        <style>.main-btn__wrapper{position:absolute;right:0;top:10px;width:267px}.main-btn__btn{width:267px;height:46px;border:1px solid #000;border-radius:6px;background-color:#000;color:#fff;font:20px sfptr;cursor:pointer}.main-btn__btn_success{border:1px solid #82bf64;background-color:#82bf64}.main-btn__btn_error{border:1px solid #ff6464;background-color:#ff6464}.main-btn__btn_cancel{border:1px solid #d8d8d8;background-color:#d8d8d8}.main-btn__additional{position:absolute;right:0px;top:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.main-btn__img{width:135px;margin:8px 0 2px}.main-btn__p{text-align:right;font:13px sfptr;color:#161616}a.main-btn__btn{display:block;text-align:center;text-decoration:none;padding-top:10px}</style>
+        <div class="main-btn__wrapper"><a class="main-btn__btn" href="#">Оплатити</a>
           <div class="main-btn__additional"><img class="main-btn__img" alt="support" src="../img/e-support.jpg">
             <p class="main-btn__p">*одна покупка різними картками</p>
           </div>
