@@ -1,0 +1,17 @@
+doctype
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Bill
+    link(rel="stylesheet" href="../css/bill.css")
+  body
+    include ../modules/header/header.pug
+    main
+      include ../modules/customer-info/customer-info.pug
+      .margin
+      include ../modules/pay-info/pay-info.pug
+      include ../modules/pay-table/pay-table.pug
+      .btn-wrapper
+        include ../modules/main-btn/main-btn_pay.pug
+    include ../modules/footer/footer.pug

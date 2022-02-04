@@ -1,0 +1,47 @@
+.main-btn {
+  &__wrapper {
+    position: absolute;
+    right: 0;
+    top: 10px;
+    width: 267px;
+  }
+  &__btn {
+    width: 267px;
+    height: 46px;
+    border: 1px solid black;
+    border-radius: 6px;
+    background-color: black;
+    color: white;
+    font: 20px sfptr;
+    cursor: pointer;
+    &_success {
+      border: 1px solid #82BF64;
+      background-color: #82BF64;
+    }
+    &_error {
+      border: 1px solid #FF6464;
+      background-color: #FF6464;
+    }
+    &_cancel {
+      border: 1px solid #D8D8D8;
+      background-color: #D8D8D8;
+    }
+  }
+  &__additional {
+    position: absolute;
+    right: 0px;
+    top: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  &__img {
+    width: 135px;
+    margin: 8px 0 2px;
+  }
+  &__p {
+    text-align: right;
+    font: 13px sfptr;
+    color: #161616;
+  }
+}

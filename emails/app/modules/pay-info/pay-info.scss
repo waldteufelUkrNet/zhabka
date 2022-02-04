@@ -1,0 +1,48 @@
+.pay-info {
+  padding: 40px 40px 0 40px;
+  &__header {
+    font: 18px sfptr;
+    color: #263238;
+    height: 31px;
+    background-color: #FAFAFA;
+    padding: 4px 12px;
+  }
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: 500px) {
+      flex-direction: row;
+    }
+  }
+  &__logo {
+    width: 111px;
+    height: 111px;
+    margin-left: 5px;
+  }
+  &__main {
+    color: #161616;
+    margin: 0 35px;
+  }
+  &__subheader {
+    font: 13px sfptb;
+    line-height: 16px;
+    text-align: center;
+    padding: 10px 0;
+    @media (min-width: 500px) {
+      text-align-last: left;
+      padding: 0;
+    }
+  }
+  &__about {
+    font: 13px sfptr;
+    line-height: 16px;
+  }
+  &__price {
+    font: 18px sfptb;
+    min-width: 100px;
+    text-align: right;
+  }
+}

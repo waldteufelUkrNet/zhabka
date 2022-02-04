@@ -1,0 +1,47 @@
+.customer-info {
+  padding: 0px 40px;
+  &__row {
+    min-height: 56px;
+    margin-bottom: 4px;
+    &_1col {
+      background-color: #FAFAFA;
+      padding: 6px 12px;
+    }
+    &_2col {
+      display: flex;
+      flex-direction: column;
+      @media (min-width: 625px) {
+        flex-direction: row;
+      }
+    }
+  }
+  &__col {
+    background-color: #FAFAFA;
+    margin-right: 4px;
+    width: 100%;
+    padding: 6px 12px;
+    @media (min-width: 625px) {
+      width: 50%;
+    }
+    &_transparent {
+      background-color: transparent;
+      position: relative;
+    }
+  }
+  &__title {
+    font: 18px sfptr;
+    color: #666666;
+  }
+  &__data {
+    font: 18px sfptb;
+    &_be {
+      color: #007EFC;
+    }
+    &_bk {
+      color: #263238;
+    }
+    &_r {
+      color: #FF6464;
+    }
+  }
+}

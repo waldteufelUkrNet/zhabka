@@ -1,0 +1,52 @@
+.footer {
+  padding: 56px 30px 10px;
+  font: 10px sfptr;
+  &__text {
+    line-height: 15px;
+    margin-bottom: 15px;
+  }
+  &__logo {
+    width: 40px;
+    display: block;
+    margin: 47px auto 2px;
+
+  }
+  &__menu {
+    display: flex;
+    justify-content: center;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    flex-direction: column;
+    align-items: center;
+    @media (min-width: 360px) {
+      flex-direction: row;
+      align-items: start;
+    }
+  }
+  &__menu-item {
+    a {
+      color: #007AFF;
+      text-decoration: underline;
+      font-weight: 800;
+    }
+    span {
+      padding: 0 6px;
+    }
+  }
+  &__about {
+    text-align: center;
+    font-family: sfptb;
+    padding-bottom: 8px;
+    a {
+      color: #007AFF;
+      text-decoration: underline;
+    }
+  }
+  &__rights {
+    text-align: center;
+    padding-bottom: 10px;
+    &:last-of-type {
+      padding-top: 8px;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+.header {
+  padding: 40px 40px 27px 40px;
+  display: flex;
+  justify-content: space-between;
+  &__col {
+    &:last-of-type {
+      text-align: right;
+    }
+  }
+  &__logo-img {
+    padding-top: 8px;
+    padding-left: 4px;
+  }
+  &__logo-name {
+    color: #82BF64;
+    font: 20px sfptb;
+    text-transform: uppercase;
+    font-style: normal;
+    font-weight: bold;
+    line-height: 24px;
+    margin-top: -10px;
+  }
+  &__title {
+    padding-top: 10px;
+    font: 48px sfptl;
+    line-height: 22px;
+    color: #82BF64;
+    letter-spacing: -2px;
+  }
+  &__transcription {
+    font: 20px sfptb;
+    text-transform: uppercase;
+    line-height: 24px;
+    color: #82BF64;
+    padding-top: 18px;
+  }
+  &_canceled {
+    .header__title {
+      color: #FF6464;
+    }
+    .header__transcription {
+      color: #FF6464;
+    }
+  }
+}

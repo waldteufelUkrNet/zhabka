@@ -1,0 +1,58 @@
+.pay-info {
+  &__table {
+    padding: 54px 40px 27px 40px;
+  }
+  &__table-row {
+    height: 50px;
+    display: grid;
+    grid-template-columns: auto auto;
+    font: 18px sfptr;
+    font-weight: 800;
+    border: {
+      top: 1px solid #898A8D;
+      bottom: 1px solid #898A8D;
+    }
+    @media (min-width: 400px) {
+      grid-template-columns: auto 137px;
+    }
+    .pay-info__table-right-cell {
+      font-weight: 900;
+      font: 22px sfptb;
+      border-left: 1px solid #898A8D;
+    }
+    &_header {
+      border: {
+        top: 1px solid transparent;
+        bottom: 1px solid transparent;
+      }
+      .pay-info__table-left-cell {
+        font: 18px sfptr;
+        font-weight: 300
+      }
+      .pay-info__table-right-cell {
+        font: 18px sfptr;
+        font-weight: 800;
+        border-left: 1px solid transparent;
+      }
+    }
+  }
+  &__table-left-cell {
+    display: flex;
+    justify-content: flex-end;
+    span {
+      display: inline-block;
+      padding-top: 10px;
+      @media (min-width: 400px) {
+        width: 180px;
+      }
+      &:last-of-type {
+        padding-top: 14px;
+      }
+    }
+  }
+  &__table-right-cell {
+    text-align: right;
+    padding-right: 5px;
+    padding-top: 10px;
+  }
+}
