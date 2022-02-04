@@ -14,6 +14,12 @@
     color: white;
     font: 20px sfptr;
     cursor: pointer;
+
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 10px;
+
     &_success {
       border: 1px solid #82BF64;
       background-color: #82BF64;
@@ -44,11 +50,4 @@
     font: 13px sfptr;
     color: #161616;
   }
-}
-
-a.main-btn__btn {
-  display: block;
-  text-align: center;
-  text-decoration: none;
-  padding-top: 10px;
 }

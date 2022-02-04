@@ -12,6 +12,7 @@ block content
       console.log('click on send');
       let response = await fetch('http://localhost:3001/sendinblue/send');
       if (response.status == 200) {
-        console.log('server answer: ', await response.text());
+        //- console.log('server answer: ', await response.text());
+        document.documentElement.innerHTML = await response.text()
       }
     });

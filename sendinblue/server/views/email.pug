@@ -1,0 +1,130 @@
+-
+  let headerModClass      = 'header',
+      headerTranscription = '',
+      userModClass        = 'customer-info__data_be',
+      billModClass        = 'customer-info__data_bk',
+      userBtnModClass     = 'main-btn__btn',
+      bill1SumDescription = 'Сплачено:',
+      bill2SumDescription = 'Очікує оплати:',
+      billBtnModClass     = 'main-btn__btn',
+      billBtnDescription  = 'Оплатити',
+      logoSrc             = staticFilesSrc + 'logo.png',
+      eSupportSrc         = staticFilesSrc + 'e-support.jpg',
+      stylesHref          = staticFilesSrc + 'style.css';
+
+  if ( billType == 'not_paid' ) {
+    //
+  } else if ( billType == 'paid' ) {
+    headerTranscription = 'оплачено';
+    userBtnModClass = 'main-btn__btn main-btn__btn_success';
+    bill1SumDescription = 'Знижка:';
+    bill2SumDescription = 'Баланс:';
+    billBtnModClass     = 'main-btn__btn main-btn__btn_success';
+    billBtnDescription  = 'Квитанція';
+  } else if ( billType == 'partially_paid' ) {
+    headerTranscription = 'частково оплачено';
+  } else if ( billType == 'canceled' ) {
+    headerModClass = 'header header_canceled';
+    headerTranscription = 'скасовано';
+    userModClass = 'customer-info__data_bk';
+    billModClass = 'customer-info__data_r';
+    userBtnModClass = 'main-btn__btn main-btn__btn_error';
+    bill1SumDescription = 'Коштів повернуто:';
+    bill2SumDescription = 'Баланс:';
+    billBtnModClass     = 'main-btn__btn main-btn__btn_cancel';
+    billBtnDescription  = 'Скасовано';
+  }
+
+doctype
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Bill
+    link(rel="stylesheet" href=stylesHref)
+  body
+    div(class=headerModClass)
+      .header__col
+        img.header__logo-img(alt="logo" src=logoSrc)
+        .header__logo-name жабка
+      .header__col
+        h1.header__title Рaхунок
+        h2.header__transcription #{headerTranscription}
+    main
+      .customer-info
+        .customer-info__row.customer-info__row_1col
+          .customer-info__title Виписаний на покупця:
+          .customer-info__data(class=userModClass) #{userName}
+        .customer-info__row.customer-info__row_2col
+          .customer-info__col
+            .customer-info__title Кінцева дата оплати:
+            .customer-info__data(class=billModClass) #{billEndDate}
+          .customer-info__col
+            .customer-info__title Номер рахунку
+            .customer-info__data(class=billModClass) #{billNumber}
+        .customer-info__row.customer-info__row_2col
+          .customer-info__col
+            .customer-info__title Контакти покупця:
+            .customer-info__data(class=userModClass) #{userPhone}
+          .customer-info__col.customer-info__col_transparent
+            .main-btn__wrapper
+              a(class=userBtnModClass href="#") Переглянути
+              .main-btn__additional
+                img.main-btn__img(alt="support" src=eSupportSrc)
+                p.main-btn__p *одна покупка різними картками
+      .margin
+      .pay-info
+        h3.pay-info__header Рахунок на оплату:
+        .pay-info__row
+          img.pay-info__logo(alt="pay logo" src=billImgSrc)
+          .pay-info__main
+            h4.pay-info__subheader #{billHeader}
+            .pay-info__about #{billDescription}
+          .pay-info__price #{billPrice}
+      .pay-info__table
+        .pay-info__table-row.pay-info__table-row_header
+          .pay-info__table-left-cell
+            span #{bill1SumDescription}
+          .pay-info__table-right-cell
+            span #{bill1Sum}
+        .pay-info__table-row
+          .pay-info__table-left-cell
+            span #{bill2SumDescription}
+          .pay-info__table-right-cell
+            span #{bill2Sum}
+      .btn-wrapper
+        .main-btn__wrapper
+          a(class=billBtnModClass href="#") #{billBtnDescription}
+          .main-btn__additional
+            img.main-btn__img(alt="support" src=eSupportSrc)
+            p.main-btn__p *одна покупка різними картками
+      .footer
+        p.footer__text *Що таке оплата різними картками? Ви можете поділити вартість замовлення на кілька частин. Оплата замовлення повністю або його частини можлива карткою еПідтримка.
+        p.footer__text Наприклад, вартість квитка 1300грн. Ви можете розділити його на три частини: 1000грн з картки еПідтримка, 250грн з іншої карти еПідтримка, та 50 грн карткою Вашого банку.
+        p.footer__text Важливо: у Вас є дві доби на оплату різними картами. Якщо повна вартість Вашого замовлення не буде покрита, гроші автоматично повертаються на Ваші рахунки. Ви завжди можете повернутися на сторінку оплати різними картами з цього посилання, яке Ви отримали на Ваш email.
+
+        img.footer__logo(alt="logo" src=logoSrc)
+
+        .footer__menu
+          .footer__menu-item
+            a(href="#") Про Жабку
+            span 🐸
+          .footer__menu-item
+            a(href="#") Карткові платежі
+            span 🤑
+          .footer__menu-item
+            a(href="#") Для бізнесу
+            span 🚀
+
+        .footer__about
+          a(href="#") Жабка
+          |
+          |
+          span - перший в Україні крос-платформений платіжний сервіс для фізичних осіб та бізнесу
+
+        p.footer__rights Загартовано ФОПами для ФОПів
+        p.footer__rights © All Rights Reserved. 4ek LLC.
+        p.footer__rights Ви отримали цей лист, тому що є клієнтом нашого сервісу. Якщо ви не хочете більше отримувати наші листи
+          |
+          |
+          a(href="#") натисниіть сюди

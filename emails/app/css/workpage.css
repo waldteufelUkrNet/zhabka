@@ -56,19 +56,19 @@ table {
   font-family: "sfptl";
   font-style: normal;
   font-weight: 100;
-  src: local("SF Pro Display"), url("https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYREGULAR.woff") format("woff");
+  src: url("http://wtwt.pp.ua/temp/SFProText-Light.ttf");
 }
 @font-face {
   font-family: "sfptr";
   font-style: normal;
   font-weight: 500;
-  src: local("SF Pro Display"), url("https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYREGULAR.woff") format("woff");
+  src: url("http://wtwt.pp.ua/temp/SFProText-Regular.ttf");
 }
 @font-face {
   font-family: "sfptb";
   font-style: normal;
   font-weight: 700;
-  src: local("SF Pro Display"), url("https://fonts.cdnfonts.com/s/59278/SFPRODISPLAYREGULAR.woff") format("woff");
+  src: url("http://wtwt.pp.ua/temp/SFProText-Bold.ttf");
 }
 * {
   -webkit-box-sizing: border-box;
