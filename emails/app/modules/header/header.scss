@@ -1,7 +1,10 @@
 .header {
-  padding: 40px 40px 27px 40px;
+  padding: 10px;
   display: flex;
   justify-content: space-between;
+  @media (min-width: 768px) {
+    padding: 40px 40px 27px 40px;
+  }
   &__col {
     &:last-of-type {
       text-align: right;

@@ -1,5 +1,8 @@
 .pay-info {
-  padding: 40px 40px 0 40px;
+  padding: 10px;
+  @media (min-width: 768px) {
+    padding: 40px 40px 0 40px;
+  }
   &__header {
     font: 18px sfptr;
     color: #263238;

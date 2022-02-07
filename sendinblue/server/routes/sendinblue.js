@@ -44,7 +44,9 @@ router.get('/send', function(req, res, next) {
         'htmlContent' : html
       }
     )
-    .then(res => console.log(res))
+    .then(res => {
+      // do something if ok
+    })
     .catch(err => console.error(err));
 
   });
