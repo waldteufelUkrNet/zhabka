@@ -10,7 +10,10 @@
       billBtnDescription  = 'Оплатити',
       logoSrc             = staticFilesSrc + 'logo.png',
       eSupportSrc         = staticFilesSrc + 'e-support.jpg',
-      stylesHref          = staticFilesSrc + 'style.css';
+      stylesHref          = staticFilesSrc + 'style.css',
+      phoneHref           = 'tel:' + userPhone,
+      btn1href            = userBtnHref,
+      btn2href            = billBtnHref;
 
   if ( billType == 'not_paid' ) {
     //
@@ -65,10 +68,10 @@ html
         .customer-info__row.customer-info__row_2col
           .customer-info__col
             .customer-info__title Контакти покупця:
-            .customer-info__data(class=userModClass) #{userPhone}
+            a.customer-info__data(class=userModClass href=phoneHref style="text-decoration:none") #{userPhone}
           .customer-info__col.customer-info__col_transparent
             .main-btn__wrapper
-              a(class=userBtnModClass href="#") Переглянути
+              a(class=userBtnModClass href=btn1href) Переглянути
               .main-btn__additional
                 img.main-btn__img(alt="support" src=eSupportSrc)
                 p.main-btn__p *одна покупка різними картками
@@ -94,7 +97,7 @@ html
             span #{bill2Sum}
       .btn-wrapper
         .main-btn__wrapper
-          a(class=billBtnModClass href="#") #{billBtnDescription}
+          a(class=billBtnModClass href=btn1href) #{billBtnDescription}
           .main-btn__additional
             img.main-btn__img(alt="support" src=eSupportSrc)
             p.main-btn__p *одна покупка різними картками

@@ -30,7 +30,9 @@ router.get('/send', function(req, res, next) {
     bill1Sum       : '₴ 0,00',
     bill2Sum       : '₴ 17 102',
     staticFilesSrc : 'http://wtwt.pp.ua/temp/',
-    subject        : 'Ваша квитанція'
+    subject        : 'Ваша квитанція',
+    userBtnHref    : 'href for link in user-info group',
+    billBtnHref    : 'href for link under bill-table'
   };
 
   res.status(200).render('email.pug', emailOptions, function(err, html){
