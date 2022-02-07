@@ -1,0 +1,64 @@
+
+
+.add_form_button {
+	height: 80px;
+	width: 80px;
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	background-repeat: round;
+	background-image: url(../../../assets/images/add.png);
+}
+
+
+.base-icon {
+  height: 18px;
+  width: 18px;
+
+  background-repeat: round;
+  background-position: center;
+
+  display: inline-block;
+  padding-left: 10px;
+  margin-left: 10px;
+
+}
+
+.edit-icon {
+  background-image: url(../../../assets/images/table/edit@2x.png);
+}
+
+.edit-icon:hover {
+  background-image: url(../../../assets/images/table/active/edit@2x.png);
+}
+
+.remove-icon {
+  float: right;
+  background-image: url(../../../assets/images/table/trash@2x.png);
+}
+
+.remove-icon:hover {
+  background-image: url(../../../assets/images/table/active/trash@2x.png);
+}
+
+.stat-icon {
+  background-image: url(../../../assets/images/table/stat@2x.png);
+}
+
+.stat-icon:hover {
+  background-image: url(../../../assets/images/table/active/stat@2x.png);
+}
+
+.red-star {
+  color: red;
+}
+.red-error{
+  color: red;
+}
+.yellow-error{
+  color: rgb(228, 151, 8);
+}
+
+.blue-error{
+  color: blue;
+}

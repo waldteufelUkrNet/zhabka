@@ -1,0 +1,58 @@
+<div class="card mb-3">
+
+  <div class="card-body table-responsive">
+    <div class="col-12 d-flex justify-content-end">
+      <button class="btn btn-primary" (click)="refreshlist()" style="margin-bottom: 10px; margin-right: 10px;">Обновить</button>
+      <button class="btn btn-primary" (click)="openForm(smsForm)" style="margin-bottom: 10px;">Добавить</button>
+    </div>
+    <table class="table table-hover table-striped">
+      <thead>
+      <tr>
+        <th>
+          <div class="d-flex w-100 align-items-center">ID</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Email</div>
+        </th>
+        <th>
+          
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="c-pointer" *ngFor="let item of list">
+        <td>{{item.id}}</td>
+        <td>{{item.email}}</td>
+
+        <td style = "color: rgb(255, 123, 0);" (click)="removeFeedbackEmail(item.id)">Удалить</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+</div>
+
+
+<ng-template #smsForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>Новый Email</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="openedBrand">
+      
+      <div class="col-12">
+        <label class="label">Email</label>
+        <app-custom-input [value]="openedBrand.email" [placeholder]="'Email'" (change) = "setText($event)"></app-custom-input>
+      </div>
+      <div *ngIf="openedBrand && openedBrand.email" class="col-12 d-flex justify-content-end" style = "margin-top: 20px;">
+        <button class="btn btn-primary" (click)="addFeedbackEmail()">Добавить</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

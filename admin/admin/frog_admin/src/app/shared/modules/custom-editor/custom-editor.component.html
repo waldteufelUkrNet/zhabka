@@ -1,0 +1,5 @@
+<div class="custom-field-block">
+  <div class="custom-field-label" *ngIf="label">{{label}}</div>
+  <ckeditor [editor]="Editor" [(ngModel)]="currentValue" (ngModelChange)="changed()"></ckeditor>
+  <div class="error-message" *ngIf="!valid.status && showError">{{valid.message}}</div>
+</div>

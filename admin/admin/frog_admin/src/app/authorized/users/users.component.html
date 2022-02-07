@@ -1,0 +1,227 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div>
+      <app-custom-input [value]="search" [placeholder]="'Поиск...'" (change)="setSearchValue($event)"></app-custom-input>
+    </div>
+  </div>
+  <div class="card-body table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+      <tr>
+        <th>
+          <div class="d-flex w-100 align-items-center">ID</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Phone</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Status</div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="c-pointer" *ngFor="let item of list" (click)="openForm(userForm, item)">
+        <td>{{item.id}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{getUserStatus(item.is_blocked)}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-my-pagination *ngIf="countList" [countItems]="countList" [showInPages]="countShowInPage" (changePage)="pageChanged($event)"></app-my-pagination>
+</div>
+
+
+<ng-template #userForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>Пользователь</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="openedBrand">
+      <div class="col-12" *ngIf="openedBrand.id">
+        <label class="label">ID</label>
+        <app-custom-input [value]="openedBrand.id" [placeholder]="'ID'" [disabled]="true"></app-custom-input>
+      </div>
+      <div class="col-12">
+        <label class="label">Номер телефона</label>
+        <app-custom-input [value]="openedBrand.phone" [placeholder]="'phone'" [disabled]="true" ></app-custom-input>
+      </div>
+      <div *ngIf="openedBrand.is_blocked" class="col-12 ">
+        <label class="label">Пользоваель заблокирован</label>
+        <button style="display: block;" class="btn btn-primary" (click)="unblockUser()">Разблокировать</button>
+      </div>
+      <div *ngIf="!openedBrand.is_blocked" class="col-12 ">
+        <label class="label">Пользоваель активен</label>
+        <button style="display: block;" class="btn btn-primary" (click)="blockUser()">Заблокировать</button>
+      </div>
+
+       <div class="col-md-12">
+        <hr>
+        <label class="modal_label" style="display: block;">Мерчанты</label>
+
+        <table class="table table-hover table-striped">
+          <thead>
+          <tr>
+            <th>
+              <div class="d-flex w-100 align-items-center">ID</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">Название</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">INN/EDRPOU</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">IBAN</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">BANK</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="c-pointer" *ngFor="let item of openedBrand.merchants" >
+            <td>{{item.unique_id || '-'}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.inn_edrpou}}</td>
+            <td>{{item.iban}}</td>
+            <td>{{item.bank}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <hr>
+
+       </div>
+ 
+
+       <div class="col-md-12">
+        <hr>
+        <label class="modal_label" style="display: block;" (click)="show_p = !show_p">Платежи <b style="color: blue;" *ngIf="!show_p">+</b><b style="color: blue;" *ngIf="show_p">-</b></label>
+        
+        <table *ngIf="openedBrand.payments.length && show_p" class="table table-hover table-striped">
+          <thead>
+          <tr>
+            <th>
+              <div class="d-flex w-100 align-items-center">ID</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">Сумма(копейки)</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">Сатус</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">Дата создания</div>
+            </th>
+            <th>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="c-pointer" *ngFor="let item of openedBrand.payments" [style.background]="item.removed ? '#ca7f7f' : 'none'" >
+            <td>{{item.unique_id || '-'}}</td>
+            <td>{{item.summ}}</td>
+            <td>{{getPaymentStatus(item.payment_status)}}</td>
+            <td>{{formatDate(item.createdAt)}}</td>
+            <td>
+              <button *ngIf="item.removed" class="btn btn-primary" style = "background: #048c34;" (click)="unblockPayment(item)">Восстановить</button>
+              <button *ngIf="!item.removed && item.payment_status < 3" style = "background: red;" class="btn btn-primary" (click)="blockPayment(item)">Удалить</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+        <b style="color: red;"  *ngIf="!openedBrand.payments.length && show_p">Данные отсутствуют</b>
+        <hr>
+
+       </div>
+
+       <div class="col-md-12">
+        <hr>
+        <label class="modal_label" style="display: block;" (click)="show_p2p = !show_p2p">P2P Платежи <b style="color: blue;" *ngIf="!show_p2p">+</b><b style="color: blue;" *ngIf="show_p2p">-</b></label>
+
+        <table *ngIf="openedBrand.p2p_payments.length && show_p2p" class="table table-hover table-striped">
+          <thead>
+          <tr>
+            <th>
+              <div class="d-flex w-100 align-items-center">ID</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">Сумма(копейки)</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">Стaтус</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">Дата создания</div>
+            </th>
+            <th>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="c-pointer" *ngFor="let item of openedBrand.p2p_payments" >
+            <td>{{item.unique_id || '-'}}</td>
+            <td>{{item.summ}}</td>
+            <td>{{getPaymentStatus(item.payment_status)}}</td>
+            <td>{{formatDate(item.createdAt)}}</td>
+            <td>
+              <button *ngIf="item.removed" class="btn btn-primary" style = "background: #048c34;" (click)="unblockP2pPayment(item)">Восстановить</button>
+              <button *ngIf="!item.removed && item.payment_status < 3" style = "background: red;" class="btn btn-primary" (click)="blockP2pPayment(item)">Удалить</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <b style="color: red;"  *ngIf="!openedBrand.p2p_payments.length && show_p2p">Данные отсутствуют</b>
+        <hr>
+
+       </div>
+
+
+
+       <div class="col-md-12">
+        <hr>
+        <label class="modal_label" style="display: block;" (click)="show_devices = !show_devices; getDevices();">Устройства пользователя <b style="color: blue;" *ngIf="!show_devices">+</b><b style="color: blue;" *ngIf="show_p2p">-</b></label>
+
+        <table *ngIf="userDevices && userDevices.length && show_devices" class="table table-hover table-striped">
+          <thead>
+          <tr>
+            <th>
+              <div class="d-flex w-100 align-items-center">UDID</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">Стaтус</div>
+            </th>
+            
+            <th>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="c-pointer" *ngFor="let item of userDevices" >
+            <td>{{item.udid || '-'}}</td>
+            <td *ngIf="item.blocked" style = "color: red;">Blocked</td>
+            <td *ngIf="!item.blocked" style = "color: green;">Active</td>
+            <td>
+              <button *ngIf="item.blocked" class="btn btn-primary" style = "background: #048c34;" (click)="unblockDevice(item)">Активировать</button>
+              <button *ngIf="!item.blocked" style = "background: red;" class="btn btn-primary" (click)="blockDevice(item)">Заблокировать</button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <b style="color: red;"  *ngIf="userDevices && !userDevices.length && show_devices">Данные отсутствуют</b>
+        <hr>
+
+       </div>
+
+    </div>
+  </div>
+</ng-template>
+

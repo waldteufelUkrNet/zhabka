@@ -1,0 +1,37 @@
+<div class="custom-field-block" *ngIf="type === 'text' || type === 'password' || type === 'email'">
+  <div class="custom-field-label" *ngIf="label">{{label}}</div>
+  <!--<div class="custom-field-over-label" *ngIf="!label && placeholder">{{placeholder}}</div>-->
+  <input class="custom-field" [type]="type" [placeholder]="placeholder || ''" name="custom-input" [ngClass]="{'error': !valid.status && showError, 'is-placeholder': placeholder && currentValue === ''}" [(ngModel)]="currentValue" (ngModelChange)="changed()" autocomplete="off" [disabled]="disabled">
+  <div class="error-message" *ngIf="!valid.status && showError">{{valid.message}}</div>
+</div>
+
+<div class="custom-field-block" *ngIf="type === 'number' && !discharge">
+  <div class="custom-field-label" *ngIf="label">{{label}}</div>
+  <!--<div class="custom-field-over-label" *ngIf="!label && placeholder">{{placeholder}}</div>-->
+  <input class="custom-field" [type]="type" [min]="min" [max]="max" [step]="step" [placeholder]="placeholder || ''" name="custom-input" [ngClass]="{'error': !valid.status && showError, 'is-placeholder': placeholder && currentValue === ''}" [(ngModel)]="currentValue" (ngModelChange)="changed()" autocomplete="off" [disabled]="disabled">
+  <div class="error-message" *ngIf="!valid.status && showError">{{valid.message}}</div>
+</div>
+
+<div class="custom-field-block" *ngIf="type === 'number' && discharge">
+  <div class="custom-field-label" *ngIf="label">{{label}}</div>
+  <!--<div class="custom-field-over-label" *ngIf="!label && placeholder">{{placeholder}}</div>-->
+  <input class="custom-field" type="text" [placeholder]="placeholder || ''" name="custom-input" [ngClass]="{'error': !valid.status && showError, 'is-placeholder': placeholder && currentValue === ''}" [(ngModel)]="currentValue" (keyup)="changed()" autocomplete="off" [disabled]="disabled">
+  <div class="error-message" *ngIf="!valid.status && showError">{{valid.message}}</div>
+</div>
+
+<div class="custom-field-block" *ngIf="type === 'textarea'">
+  <div class="custom-field-label" *ngIf="label">{{label}}</div>
+  <!--<div class="custom-field-over-label" *ngIf="!label && placeholder">{{placeholder}}</div>-->
+  <div class="w-100" style="height: 93px;">
+    <textarea name="custom-input" class="custom-field textarea-field" [placeholder]="placeholder || ''" autocomplete="off" [(ngModel)]="currentValue" [ngClass]="{'error': !valid.status && showError, 'is-placeholder': placeholder && currentValue === ''}" (ngModelChange)="changed()" [disabled]="disabled"></textarea>
+  </div>
+
+  <div class="error-message" *ngIf="!valid.status && showError">{{valid.message}}</div>
+</div>
+
+<div class="check-input" *ngIf="type === 'check'" (click)="setCheckVal()">
+  <div class="check" [ngClass]="{'active': currentValue}">
+    <app-icon [name]="'check'" [color]="'#ffffff'" [width]="13" [height]="10"></app-icon>
+  </div>
+  {{label}}
+</div>

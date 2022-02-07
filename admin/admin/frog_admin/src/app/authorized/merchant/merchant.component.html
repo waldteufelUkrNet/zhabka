@@ -1,0 +1,129 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div>
+      <app-custom-input [value]="search" [placeholder]="'Поиск...'" (change)="setSearchValue($event)"></app-custom-input>
+    </div>
+  </div>
+  <div class="card-body table-responsive">
+    <div class="col-12 d-flex justify-content-end">
+      <button class="btn btn-primary" (click)="openCreateForm(newMerchantForm)" style="margin-bottom: 10px;">Добавить</button>
+    </div>
+    <table class="table table-hover table-striped">
+      <thead>
+      <tr>
+        <th>
+          <div class="d-flex w-100 align-items-center">Внутренний ID</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">ИНН</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">ЕДРПОУ</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Короткое название</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Полное название</div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="c-pointer" *ngFor="let item of list" (click)="openForm(userForm, item)">
+        <td>{{item.id || '-'}}</td>
+        <td>{{item.inn || '-'}}</td>
+        <td>{{item.edrpou || '-'}}</td>
+        <td>{{item.shortName || '-'}}</td>
+        <td>{{item.fullName || '-'}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-my-pagination *ngIf="countList" [countItems]="countList" [showInPages]="countShowInPage" (changePage)="pageChanged($event)"></app-my-pagination>
+</div>
+
+
+<ng-template #userForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>Мерчант</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="openedBrand">
+      <div class="col-12" *ngIf="openedBrand.id">
+        <h3>Данные мерчанта</h3>
+        <label class="label">Внутренний ID</label>
+        <app-custom-input [value]="openedBrand.id" [placeholder]="'ID'" [disabled]="true"></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.inn">
+        <label class="label">ИНН</label>
+        <app-custom-input [value]="openedBrand.inn" [placeholder]="'ИНН'" [disabled]="true"></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.edrpou">
+        <label class="label">ЕДРПОУ</label>
+        <app-custom-input [value]="openedBrand.edrpou" [placeholder]="'ЕДРПОУ'" [disabled]="true"></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.shortName">
+        <label class="label">Короткое название</label>
+        <app-custom-input [value]="openedBrand.shortName" [placeholder]="'Короткое название'" [disabled]="true"></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.fullName">
+        <label class="label">Полное название</label>
+        <app-custom-input [value]="openedBrand.fullName" [placeholder]="'Полное название'" [disabled]="true"></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.legalAddress">
+        <label class="label">Адрес</label>
+        <app-custom-input [value]="openedBrand.legalAddress" [placeholder]="'Адрес'" [disabled]="true"></app-custom-input>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #newMerchantForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>Новый мерчант</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="openedBrand">
+    
+      <div class="col-12" >
+        <label class="label">ИНН</label>
+        <app-custom-input [value]="openedBrand.inn" (change) = "setInputValue($event, 'inn')" [placeholder]="'ИНН'"></app-custom-input>
+      </div>
+      <div class="col-12" >
+        <label class="label">ЕДРПОУ</label>
+        <app-custom-input [value]="openedBrand.edrpou" (change) = "setInputValue($event, 'edrpou')" [placeholder]="'ЕДРПОУ'" ></app-custom-input>
+      </div>
+      <div class="col-12" >
+        <label class="label">Короткое название</label>
+        <app-custom-input [value]="openedBrand.shortName" (change) = "setInputValue($event, 'shortName')" [placeholder]="'Короткое название'"></app-custom-input>
+      </div>
+      <div class="col-12">
+        <label class="label">Полное название</label>
+        <app-custom-input [value]="openedBrand.fullName" (change) = "setInputValue($event, 'fullName')" [placeholder]="'Полное название'" ></app-custom-input>
+      </div>
+      <div class="col-12" >
+        <label class="label">Адрес</label>
+        <app-custom-input [value]="openedBrand.legalAddress" (change) = "setInputValue($event, 'legalAddress')" [placeholder]="'Адрес'" ></app-custom-input>
+      </div>
+
+      <div *ngIf="openedBrand && 
+      ( openedBrand.inn ||  openedBrand.edrpou )
+      && openedBrand.shortName
+      && openedBrand.fullName
+      && openedBrand.legalAddress" class="col-12 d-flex justify-content-end" style = "margin-top: 20px;">
+        <button class="btn btn-primary" (click)="createMerchant()">Создать мерчанта</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

@@ -1,0 +1,24 @@
+<div class="card mb-3">
+  <div class="card-header">
+    Настройки контента
+  </div>
+</div>
+<div class="card mb-3" *ngIf="settings">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-12 mb-3">
+        <app-custom-input [value]="settings.service_info" [label]="'Информация о сервисе'" [placeholder]="'Информация о сервисе'" (change)="setFieldValue($event, 'service_info')"></app-custom-input>
+      </div>
+      <div class="col-12 mb-3">
+        <app-custom-input [value]="settings.electronic_info" [label]="'Информация о электронных чеках'" [placeholder]="'Информация о электронных чеках'" (change)="setFieldValue($event, 'electronic_info')"></app-custom-input>
+      </div>
+      <div class="col-12 mb-3">
+        <app-custom-editor [value]="settings.terms_of_use" [label]="'Условия пользования'" (change)="setFieldValue($event, 'terms_of_use')"></app-custom-editor>
+      </div>
+      <div class="col-12 d-flex align-items-center justify-content-end" style="height: 25px">{{message}}</div>
+      <div class="col-12 d-flex justify-content-end">
+        <button class="btn btn-primary" (click)="saveSettings()">Сохранить</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,147 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div>
+      <app-custom-input [value]="search" [placeholder]="'Поиск...'" (change)="setSearchValue($event)"></app-custom-input>
+    </div>
+    <div style="padding-top: 10px;">
+      <button style="display: block; float: right;" class="btn btn-primary" (click)="openCreateForm(newForm)">Добавить разрешениие МСС</button>
+    </div>
+  </div>
+  <div class="card-body table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+      <tr>
+        <th>
+          <div class="d-flex w-100 align-items-center">Мерчант ID</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Номер телефона</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">ИНН\ЕДРПОУ</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Код МСС</div>
+        </th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="c-pointer" *ngFor="let item of list" (click)="openForm(userForm, item)">
+        <td>{{item.view_merchant_id || '-'}}</td>
+        <td>{{item.view_merchant_phone || '-'}}</td>
+        <td>{{item.inn_edrpou}}</td>
+        <td>{{item.mcc.number}}</td>
+        <td>
+          <i class="fa fa-trash c-pointer" (click)="openDeleteForm(deleteForm, item); $event.stopPropagation()"></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-my-pagination *ngIf="countList" [countItems]="countList" [showInPages]="countShowInPage" (changePage)="pageChanged($event)"></app-my-pagination>
+</div>
+
+
+<ng-template #userForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>МСС</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="openedBrand">
+      <div class="col-12" >
+        <h3>Данные разрешенного МСС</h3>
+        <label class="label">Мерчант ID</label>
+        <app-custom-input [value]="openedBrand.view_merchant_id" [placeholder]="'Merchant id'" [disabled]="true"></app-custom-input>
+      </div>
+
+      <div class="col-12">
+        <label class="label">Инн\Едрпоу</label>
+        <app-custom-input [value]="openedBrand.merchant.inn_edrpou" [placeholder]="'merchant'" [disabled]="true" ></app-custom-input>
+      </div>
+
+      <div class="col-12" >
+        <label class="label">Номер телефона</label>
+        <app-custom-input [value]="openedBrand.view_merchant_phone" [placeholder]="'Phone'" [disabled]="true"></app-custom-input>
+      </div>
+
+      <div class="col-12">
+        <label class="label">Мерчант</label>
+        <app-custom-input [value]="openedBrand.merchant.name" [placeholder]="'merchant'" [disabled]="true" ></app-custom-input>
+      </div>
+      <div class="col-12">
+        <label class="label">Название торговой точки</label>
+        <app-custom-input [value]="openedBrand.merchant.trade_point_name" [placeholder]="'merchant'" [disabled]="true" ></app-custom-input>
+      </div>
+      <div class="col-12">
+        <label class="label">MCC код</label>
+        <app-custom-input [value]="openedBrand.mcc.number" [placeholder]="'merchant'" [disabled]="true" ></app-custom-input>
+      </div>
+      <div class="col-12">
+        <label class="label">MCC группа</label>
+        <app-custom-input [value]="openedBrand.mcc.description" [placeholder]="'merchant'" [disabled]="true" ></app-custom-input>
+      </div>
+
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #newForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>МСС</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="new_mcc">
+      <div class="col-12" >
+        <h3>Данные разрешенного МСС</h3>
+        <label class="label">Мерчант ID</label>
+        <app-custom-input [value]="new_mcc.merchant_id" [placeholder]="'Merchant id'" [disabled]="false" (change)="setInputValue($event, 'merchant_id')"></app-custom-input>
+      </div>
+      <div class="col-12">
+        <label class="label">Инн\Едрпоу</label>
+        <app-custom-input [value]="new_mcc.inn_edrpou" [placeholder]="'inn_edrpou'" [disabled]="false"  (change)="setInputValue($event, 'inn_edrpou')"></app-custom-input>
+      </div>
+      <div class="col-12">
+        <label class="label">MCC код</label>
+        <app-custom-input [value]="new_mcc.mcc_code" [placeholder]="'number'" [disabled]="false" (change)="setInputValue($event, 'mcc_code')"></app-custom-input>
+      </div>
+   
+      <div class="col-12 " *ngIf="checkChanges()"  style="padding-top: 10px;">
+        <button style="display: block; float: right;" class="btn btn-primary" (click)="saveChanges()">Добавить</button>
+      </div>
+
+
+    </div>
+  </div>
+</ng-template>
+
+
+<ng-template #deleteForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>Удаление разрешения</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-12">
+        Вы действительно хотите удалить разрешение?
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-default btn-lg" (click)="closeDelete()">Отмена</button>
+    <button type="button" class="btn btn-danger btn-lg" (click)="deleteToken()">Удалить</button>
+  </div>
+</ng-template>

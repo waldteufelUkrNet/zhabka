@@ -1,0 +1,121 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-8">
+        <input type="text" name="daterange" ngxDaterangepickerMd [(ngModel)]="filter.daterange" class="form-control c-pointer" (ngModelChange)="refreshStatistic()" [locale]="{applyLabel: 'Applpy', cancelLabel: 'Cancel', format: 'DD-MM-YYYY'}" [ranges]="ranges" [alwaysShowCalendars]="true" [keepCalendarOpeningWithRange]="true" [showRangeLabelOnInput]="true" [showCancel]="true" placeholder="All" />
+      </div>
+      <div class="col-8" *ngIf="total">
+        Зашло на аккаунт: {{total.income_balance}} <br>
+        Списано с аккаунта: {{total.outcome_balance}}<br>
+        Комиссия: {{total.comission}}
+      </div>
+      <div class="col-8" *ngIf="!total">
+        Сбор данных ...
+      </div>
+    </div>
+  </div>
+  <div class="card-body table-responsive">
+    <table class="table table-hover table-striped" style= "margin-bottom: 200px;">
+      <thead>
+      <tr>
+        <th>
+          <div class="d-flex w-100 align-items-center">Внутренний ID платежа</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Баланс аккаунта</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Комиссия</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Action</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Дата</div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="c-pointer" *ngFor="let item of list" (click)="openForm(userForm, item)">
+        <td>{{item.payment_id || '-'}}</td>
+        <td><b *ngIf ="item.description.balance === 'ERROR'" style = "color: orange;">{{item.description.balance}}</b>
+          <b *ngIf ="item.description.balance > 0" style = "color: green;">{{item.description.balance}}</b>
+           <b *ngIf ="item.description.balance < 0"  style = "color: red;">{{item.description.balance}}</b>
+           <b *ngIf ="item.description.balance === 0" >-</b>
+          </td>
+        <td><b *ngIf ="item.description.comission === 'ERROR'" style = "color: orange;">{{item.description.comission}}</b>
+          <b *ngIf ="item.description.comission > 0" style = "color: green;">{{item.description.comission}}</b>
+          <b *ngIf ="item.description.comission < 0"  style = "color: red;">{{item.description.comission}}</b>
+          <b *ngIf ="item.description.comission === 0" >-</b>
+        </td>
+        <td>{{formatAction(item.description.action)}}</td>
+        <td>{{formatDate(item.created_at)}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<ng-template #userForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>Счет</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="openedBrand">
+      <div class="col-12" *ngIf="openedBrand.payment_id">
+        <h3>Данные запроса</h3>
+        <label class="label">Внутренний ID платежа</label>
+        <app-custom-input [value]="openedBrand.payment_id" [placeholder]="'ID'" [disabled]="true"></app-custom-input>
+      </div>
+
+      <div class="col-12" *ngIf="openedBrand.action">
+        <label class="label">Action</label>
+        <app-custom-input [value]="openedBrand.action" [placeholder]="'action'" [disabled]="true"></app-custom-input>
+      </div>
+
+      <div class="col-12" *ngIf="openedBrand.created_at">
+        <label class="label">Дата</label>
+        <app-custom-input [value]="formatDate(openedBrand.created_at)" [placeholder]="'created_at'" [disabled]="true"></app-custom-input>
+      </div>
+
+      <div class="col-12" *ngIf="openedBrand.merchant_id">
+        <label class="label">iPay Merchant ID</label>
+        <app-custom-input [value]="openedBrand.merchant_id" [placeholder]="'merchant_id'" [disabled]="true"></app-custom-input>
+      </div>
+
+      <div class="col-12" *ngIf="openedBrand.request_url">
+        <label class="label">Request URL</label>
+        <app-custom-input [value]="openedBrand.request_url" [placeholder]="'request_url'" [disabled]="true"></app-custom-input>
+      </div>
+
+      <div class="col-12" *ngIf="openedBrand.request_data">
+        <label class="label">Request Data</label>
+        <textarea rows="10" cols="40" style=" 
+        width: 100%;
+        display: block;">
+        {{openedBrand.request_data}}
+        </textarea>
+        
+      </div>
+
+      <div class="col-12" *ngIf="openedBrand.response_data">
+        <label class="label">Response Data</label>
+        <textarea rows="10" cols="40" style="
+        width: 100%;
+        display: block;">
+        {{openedBrand.response_data}}
+        </textarea>
+        
+      </div>
+
+
+    </div>
+  </div>
+</ng-template>
+

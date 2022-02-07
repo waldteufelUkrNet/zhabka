@@ -1,0 +1,10 @@
+<div class="unauthorized-block">
+    <div class="form-block">
+      <img class="logo" src="/assets/images/logo.png">
+      <h1>Логин</h1>
+      <app-custom-input [value]="loginForm.email.value" [showError]="showErrors" [validatorType]="'email'" [placeholder]="'E-mail'" (change)="setInputValue($event, 'email')"></app-custom-input>
+      <app-custom-input [type]="'password'" [value]="loginForm.password.value" [showError]="showErrors" [validatorType]="'password'" [placeholder]="'Пароль'" (change)="setInputValue($event, 'password')"></app-custom-input>
+      <div class="form-error">{{sendError}}</div>
+      <button class="btn btn-primary" (click)="loginAction()">Войти</button>
+    </div>
+</div>

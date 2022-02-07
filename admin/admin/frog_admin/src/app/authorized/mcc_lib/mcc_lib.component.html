@@ -1,0 +1,124 @@
+<div class="card mb-3">
+  <div class="card-body table-responsive">
+    <table class="table table-hover table-striped" style= "margin-bottom: 200px;">
+      <thead>
+      <tr>
+        <th>
+          <div class="d-flex w-100 align-items-center">Внутренний ID</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Код</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Тип</div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="c-pointer" *ngFor="let item of list" (click)="openForm(userForm, item)">
+        <td>{{item.id || '-'}}</td>
+        <td>{{item.number}}</td>
+        <td>
+          <b *ngIf ="item.type === 'free'" style = "color: orange;">{{formatType(item.type)}}</b>
+          <b *ngIf ="item.type ==='trial'" style = "color: green;">{{formatType(item.type)}}</b>
+          <b *ngIf ="item.type ==='disabled'"  style = "color: red;">{{formatType(item.type)}}</b>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+
+<ng-template #userForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>Mcc</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="openedBrand">
+      <div class="col-12" >
+        <h3>Данные Mcc</h3>
+        <label class="label">Внутренний ID</label>
+        <app-custom-input [value]="openedBrand.id" [placeholder]="'ID'" [disabled]="true"></app-custom-input>
+      </div>
+
+      <div class="col-12" *ngIf="openedBrand.number">
+        <label class="label">Код</label>
+        <app-custom-input [value]="openedBrand.number" [placeholder]="'number'" (change)="setInputValue($event, 'number')"></app-custom-input>
+      </div>
+
+      <div class="col-12" *ngIf="openedBrand.description">
+        <label class="label">Название группы</label>
+        <app-custom-input [value]="openedBrand.description" [placeholder]="'description'" (change)="setInputValue($event, 'description')"></app-custom-input>
+      </div>
+
+      <div class="col-12" *ngIf="openedBrand.payment_purpose">
+        <label class="label">Наначение платежа по умолчанию</label>
+        <app-custom-input [value]="openedBrand.payment_purpose" [placeholder]="'payment_purpose'"  (change)="setInputValue($event, 'payment_purpose')"></app-custom-input>
+      </div>
+
+      <div class="col-12">
+        <label class="label">Тип</label>
+        <select class="form-control modal_input" name="mcc_type_id" [(ngModel)]="openedBrand.type">
+          <option *ngFor="let item of mcc_types" [value]="item.code">{{item.name}}</option>
+        </select>
+      </div>
+
+
+      <div class="col-12" *ngIf="openedBrand.type === 'trial'">
+        <h3>Данные ограничений</h3>
+        <label class="label">Комиссия iPay ( при триальном доступе )</label>
+        <app-custom-input type="number" [value]="openedBrand.coefficient" step = '0.1' min='1' max = "100" (change)="setInputValue($event, 'coefficient')" [placeholder]="'coefficient'" ></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.type === 'trial'">
+        <label class="label">Минимальная сумма (коп) ( при триальном доступе )</label>
+        <app-custom-input type="number" [value]="openedBrand.minimal_summ" step = '1' min='0' (change)="setInputValue($event, 'minimal_summ')" [placeholder]="'minimal_summ'" ></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.type === 'trial'">
+        <label class="label">Максимальная сумма (коп) ( при триальном доступе )</label>
+        <app-custom-input type="number" [value]="openedBrand.maximum_summ" step = '1' min='1' (change)="setInputValue($event, 'maximum_summ')" [placeholder]="'maximum_summ'" ></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.type === 'trial'">
+        <label class="label">Лимит счетов на месяц( при триальном доступе )</label>
+        <app-custom-input type="number" [value]="openedBrand.monthly_limit" step = '1' min='1' (change)="setInputValue($event, 'monthly_limit')" [placeholder]="'monthly_limit'" ></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.type === 'trial'">
+        <label class="label">Лимит счетов на день( при триальном доступе )</label>
+        <app-custom-input type="number" [value]="openedBrand.dayly_limit" step = '1' min='1' (change)="setInputValue($event, 'dayly_limit')" [placeholder]="'dayly_limit'" ></app-custom-input>
+      </div>
+
+      <div class="col-12" *ngIf="openedBrand.type === 'trial'">
+        <h3>Данные Подключения iPay мерчанта</h3>
+        <label class="label">iPay Merchant ID</label>
+        <app-custom-input [value]="openedBrand.ipay_merchant_id" (change)="setInputValue($event, 'ipay_merchant_id')" [placeholder]="'ipay_merchant_id'" ></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.type === 'trial'">
+        <label class="label">iPay Merchant Name</label>
+        <app-custom-input [value]="openedBrand.ipay_merchant_name" (change)="setInputValue($event, 'ipay_merchant_name')" [placeholder]="'ipay_merchant_name'" ></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.type === 'trial'">
+        <label class="label">iPay Merchant Key</label>
+        <app-custom-input [value]="openedBrand.ipay_merchant_key" (change)="setInputValue($event, 'ipay_merchant_key')" [placeholder]="'ipay_merchant_key'" ></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.type === 'trial'">
+        <label class="label">iPay System Key</label>
+        <app-custom-input [value]="openedBrand.ipay_system_key" (change)="setInputValue($event, 'ipay_system_key')" [placeholder]="'ipay_system_key'" ></app-custom-input>
+      </div>
+
+   
+      <div class="col-12 " *ngIf="checkChanges(openedBrand)"  style="padding-top: 10px;">
+        <button style="display: block; float: right;" class="btn btn-primary" (click)="saveChanges(openedBrand)">Сохранить изменения</button>
+      </div>
+
+
+
+
+    </div>
+  </div>
+</ng-template>
+

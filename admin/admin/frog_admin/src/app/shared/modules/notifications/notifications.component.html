@@ -1,0 +1,7 @@
+<div class="notifications">
+    <div class="item {{notificationClass(item)}}" *ngFor="let item of notifications" (click)="removeNotification(item)">
+        <i class="{{notificationClose(item)}}"></i>
+        <div class="title">{{item.title}}</div>
+        <div class="message" [innerHTML]="item.message"></div>
+    </div>
+</div>

@@ -1,0 +1,198 @@
+<div class="card mb-3">
+  <div class="card-header">
+    <div>
+      <app-custom-input [value]="search" [placeholder]="'Поиск...'" (change)="setSearchValue($event)"></app-custom-input>
+    </div>
+  </div>
+  <div class="card-body table-responsive">
+    <table class="table table-hover table-striped">
+      <thead>
+      <tr>
+        <th>
+          <div class="d-flex w-100 align-items-center">Внутренний ID</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">iPay ID</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Status</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Номер отправителя</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Ссылка оплаты</div>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="c-pointer" *ngFor="let item of list" (click)="openForm(userForm, item)">
+        <td>{{item.unique_id || '-'}}</td>
+        <td>{{item.ipay_pid}}</td>
+        <td>{{getPaymentStatus(item)}}</td>
+        <td>{{item.sender_phone}}</td>
+        <td><a *ngIf = "item.link" [href]="item.link" >Ссылка</a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <app-my-pagination *ngIf="countList" [countItems]="countList" [showInPages]="countShowInPage" (changePage)="pageChanged($event)"></app-my-pagination>
+</div>
+
+
+<ng-template #userForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>Счет</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="openedBrand">
+      <div class="col-12" *ngIf="openedBrand.unique_id">
+        <h3>Данные счета</h3>
+        <label class="label">Внутренний ID (Frog ID)</label>
+        <app-custom-input [value]="openedBrand.unique_id" [placeholder]="'ID'" [disabled]="true"></app-custom-input>
+      </div>
+      <div class="col-12" *ngIf="openedBrand.ipay_pid">
+        <label class="label">Внешний ID (iPay ID)</label>
+        <app-custom-input [value]="openedBrand.ipay_pid" [placeholder]="'ipay_pid'" [disabled]="true"></app-custom-input>
+      </div>
+      <div class="col-12">
+        <label class="label">Номер телефона отправителя</label>
+        <app-custom-input [value]="openedBrand.sender_phone" [placeholder]="'phone'" [disabled]="true" ></app-custom-input>
+      </div>
+      <div class="col-12"  *ngIf="openedBrand.link">
+        <label class="label">Ссылка на оплату</label>
+        <app-custom-input [value]="openedBrand.link" [placeholder]="'phone'" [disabled]="true" ></app-custom-input>
+      </div>
+      <div class="col-12"  *ngIf="openedBrand.receipt">
+        <label class="label">Ссылка на платежку</label>
+        <app-custom-input [value]="openedBrand.receipt" [placeholder]="'receipt'" [disabled]="true" ></app-custom-input>
+      </div>
+      <div class="col-12"  >
+        <label class="label">Сумма (копейки)</label>
+        <app-custom-input [value]="openedBrand.summ" [placeholder]="'summ'" [disabled]="true" ></app-custom-input>
+      </div>
+      <div class="col-12"   *ngIf="openedBrand.ipay_ident">
+        <label class="label">Идентификатор (ident)</label>
+        <app-custom-input [value]="openedBrand.ipay_ident" [placeholder]="'ipay_ident'" [disabled]="true" ></app-custom-input>
+      </div>
+      <div class="col-12"  style="padding-bottom: 10px;">
+        <label class="label" >Дата создания</label>
+        <br>
+        <b>{{formatDate(openedBrand.createdAt)}}</b>
+      </div>
+
+      <div class="col-12"  style="padding-bottom: 10px;" *ngIf="openedBrand.payedAt">
+        <label class="label">Дата оплаты</label>
+        <br>
+        <b>{{formatDate(openedBrand.payedAt)}}</b>
+      </div>
+
+      <div class="col-12"  style="padding-bottom: 20px;">
+        <label class="label">Статус оплаты (код статуса)</label>
+        <br>
+        <b>{{getPaymentStatus(openedBrand)}}</b> 
+      </div>
+
+
+
+
+      <div class="col-12" *ngIf="openedBrand.payment_status === 5">
+        <h3>Данные плательщика ( получатель ссылки )</h3>
+        <label class="label">Номер телефона</label>
+        <app-custom-input [value]="openedBrand.recieved_by_phone || '-'" [placeholder]="'recieved_by_phone'" [disabled]="true"></app-custom-input>
+        
+        <label class="label">Email</label>
+        <app-custom-input [value]="openedBrand.recieved_by_email || '-'" [placeholder]="'recieved_by_email'" [disabled]="true"></app-custom-input>
+
+        <label class="label">ФИО</label>
+        <app-custom-input [value]="openedBrand.recieved_by_name || '-'" [placeholder]="'recieved_by_name'" [disabled]="true"></app-custom-input>
+
+        <label class="label">Способ оплаты</label>
+        <app-custom-input [value]="openedBrand.recieved_by_system || '-'" [placeholder]="'recieved_by_system'" [disabled]="true"></app-custom-input>
+      </div>
+
+
+      <div class="col-md-12">
+        <hr>
+        <label class="modal_label" style="display: block; color: blue;" (click)="showShows(openedBrand)">Список просмотров чека</label>
+
+        <table *ngIf="itemShows && itemShows.length" class="table table-hover table-striped">
+          <thead>
+          <tr>
+            <th>
+              <div class="d-flex w-100 align-items-center">IP</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">Agent</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">OS</div>
+            </th>
+            <th>
+              <div class="d-flex w-100 align-items-center">Дата</div>
+            </th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr class="c-pointer" *ngFor="let s_item of itemShows" >
+            <td>{{s_item.ip || '-'}}</td>
+            <td>{{s_item.agent}}</td>
+            <td>{{s_item.os}}</td>
+            <td>{{formatDate(s_item.createdAt)}}</td>
+          </tr>
+          </tbody>
+        </table>
+
+        <b style="color: red;"  *ngIf="itemShows && !itemShows.length">Данные отсутствуют</b>
+        <hr>
+
+       </div>
+
+
+       <div class="col-md-12">
+        <hr>
+        <label class="modal_label" style="display: block; color: blue;" (click)="showSender(openedBrand)">Данные отправителя</label>
+       </div>
+
+      <div class="col-md-12" *ngIf = "itemSender">
+        <label class="label">Устройство</label>
+        <app-custom-input [value]="itemSender.device" [placeholder]="'device'" [disabled]="true" ></app-custom-input>
+
+        <label class="label">ID пользователя</label>
+        <app-custom-input [value]="itemSender.user_id" [placeholder]="'user_id'" [disabled]="true" ></app-custom-input>
+
+        <label class="label">IP</label>
+        <app-custom-input [value]="itemSender.ip" [placeholder]="'ip'" [disabled]="true" ></app-custom-input>
+
+        <label class="label">ФИО</label>
+        <app-custom-input [value]="itemSender.name" [placeholder]="'name'" [disabled]="true" ></app-custom-input>
+
+        <label class="label">Номер телефона</label>
+        <app-custom-input [value]="itemSender.phone" [placeholder]="'phone'" [disabled]="true" ></app-custom-input>
+
+        <label class="label">Email</label>
+        <app-custom-input [value]="itemSender.email" [placeholder]="'email'" [disabled]="true" ></app-custom-input>
+
+        <label class="label">Версия ОС</label>
+        <app-custom-input [value]="itemSender.os_version" [placeholder]="'os_version'" [disabled]="true" ></app-custom-input>
+        
+        <label class="label">Мессенджер</label>
+        <app-custom-input [value]="itemSender.messanger || '-'" [placeholder]="'messanger'" [disabled]="true" ></app-custom-input>
+
+        <label class="label">Текст платежа</label>
+        <app-custom-input [value]="itemSender.payment_text" [placeholder]="'payment_text'" [disabled]="true" ></app-custom-input>
+
+        <label class="label">UDID устройства</label>
+        <app-custom-input [value]="itemSender.device_udid" [placeholder]="'device_udid'" [disabled]="true" ></app-custom-input>
+      </div>
+
+    
+    </div>
+  </div>
+</ng-template>
+

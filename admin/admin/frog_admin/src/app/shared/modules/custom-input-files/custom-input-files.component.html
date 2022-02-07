@@ -1,0 +1,32 @@
+<div class="w-100 d-flex custom-input-files" *ngIf="count === 1 && !disabled">
+  <div class="custom-input-file-label" *ngIf="label">{{label}}</div>
+  <label class="image-upload-label" for="single{{rand}}" [ngClass]="{'error': !valid.status && showError}">
+    <img class="form-img" [src]="currentValue" onError="this.src='assets/images/upload.png'" />
+  </label>
+  <input class="image-upload" type="file" name="single" id="single{{rand}}" [multiple]="false" (change)="uploadImage($event)">
+</div>
+
+<div class="w-100 d-flex custom-input-files" *ngIf="count > 1 && !disabled">
+  <div class="custom-input-file-label" *ngIf="label">{{label}}</div>
+
+  <div class="w-100 d-flex">
+    <label class="image-upload-label" for="many{{rand}}" *ngIf="currentValue.length < count" [ngClass]="{'error': !valid.status && showError, 'not-empty': currentValue.length}">
+      <img class="form-img" src="assets/images/upload.png" />
+    </label>
+    <div class="image-upload-image" *ngFor="let item of currentValue">
+      <img class="form-img" [src]="item" onError="this.src='assets/images/file-not-found.png'" />
+      <i class="fa fa-trash delete-icon" (click)="deleteImage(item)"></i>
+    </div>
+  </div>
+
+  <input class="image-upload" type="file" name="photos" id="many{{rand}}" [multiple]="false" (change)="uploadImage($event)" *ngIf="currentValue.length < count">
+</div>
+
+<div class="w-100 d-flex custom-input-files" *ngIf="disabled">
+  <div class="custom-input-file-label" *ngIf="label">{{label}}</div>
+
+  <div class="w-100 d-flex">
+    <label class="image-upload-label">
+      <img class="form-img" src="assets/images/upload.png" />
+    </label>
+</div>

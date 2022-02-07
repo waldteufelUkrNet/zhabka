@@ -1,0 +1,104 @@
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive, collapsed: collapsed}">
+  <div class="list-group">
+    <div class="list-subgroup" [ngClass]="{'active': openedSubgroup === 'check'}">
+      <div class="subgroup-title" (click)="toggleSubgroup('check')">Основное меню</div>
+      <div class="subgroup-content">
+        <a [routerLink]="['users' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Пользователи' }}</span>
+        </a>
+        <a [routerLink]="['device_black_list' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Устройства' }}</span>
+        </a>
+        <a [routerLink]="['versions' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Версии приложения' }}</span>
+        </a>
+        <a [routerLink]="['offer' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Offers' }}</span>
+        </a>
+        
+        
+      </div>
+    </div>
+
+    <div class="list-subgroup" [ngClass]="{'active': openedSubgroup === 'paym'}">
+      <div class="subgroup-title" (click)="toggleSubgroup('paym')">Платежи</div>
+      <div class="subgroup-content">
+        <a [routerLink]="['payments' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Бизнес платежи' }}</span>
+        </a>
+        <a [routerLink]="['p2p_payments' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Р2Р платежи' }}</span>
+        </a>
+        <a [routerLink]="['p2p_payouts' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Р2Р выплаты' }}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="list-subgroup" [ngClass]="{'active': openedSubgroup === 'ved'}">
+      <div class="subgroup-title" (click)="toggleSubgroup('ved')">Ведомости</div>
+      <div class="subgroup-content">
+
+        <a [routerLink]="['p2p_payouts_logs' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Р2Р выплаты' }}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="list-subgroup" [ngClass]="{'active': openedSubgroup === 'mcc'}">
+      <div class="subgroup-title" (click)="toggleSubgroup('mcc')">MCC</div>
+      <div class="subgroup-content">
+
+        <a [routerLink]="['mcc_lib' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Справочник MCC' }}</span>
+        </a>
+        <a [routerLink]="['merchant_mcc' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'MCC разрешения' }}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="list-subgroup" [ngClass]="{'active': openedSubgroup === 'stat'}">
+      <div class="subgroup-title" (click)="toggleSubgroup('stat')">Статистика</div>
+      <div class="subgroup-content">
+        <a [routerLink]="['statistics' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Общая статистика' }}</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="list-subgroup" [ngClass]="{'active': openedSubgroup === 'feedback'}">
+      <div class="subgroup-title" (click)="toggleSubgroup('feedback')">Обращения</div>
+      <div class="subgroup-content">
+        <a [routerLink]="['feedback' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Обращения' }}</span>
+        </a>
+        <a [routerLink]="['feedback_email' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'Оповенщение о обращениях' }}</span>
+        </a>
+        <a [routerLink]="['merchants' | link]" [routerLinkActive]="['router-link-active']" class="list-group-item">
+          <i class="fa fa-fw fa-id-badge"></i>&nbsp;
+          <span>{{ 'БД предприятий' }}</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+  <div class="toggle-button" [ngClass]="{collapsed: collapsed}" (click)="toggleCollapsed()">
+    <i class="fa fa-fw fa-angle-double-{{collapsed?'right':'left'}}"></i>&nbsp;
+    <span>{{ 'Убрать' }}</span>
+  </div>
+</nav>

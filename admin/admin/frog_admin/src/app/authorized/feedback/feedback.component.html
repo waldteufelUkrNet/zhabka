@@ -1,0 +1,72 @@
+<div class="card mb-3">
+
+  <div class="card-body table-responsive">
+    <div class="col-12 d-flex justify-content-end">
+      <button class="btn btn-primary" (click)="refreshlist()" style="margin-bottom: 10px;">Обновить</button>
+    </div>
+    <table class="table table-hover table-striped">
+      <thead>
+      <tr>
+        <th>
+          <div class="d-flex w-100 align-items-center">ID</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Телефон</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Текст обращения</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">Дата обращения</div>
+        </th>
+        <th>
+          <div class="d-flex w-100 align-items-center">СМС ответы</div>
+        </th>
+        <th>
+          
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr class="c-pointer" *ngFor="let item of list">
+        <td>{{item.id}}</td>
+        <td>{{item.phone}}</td>
+        <td>{{item.text}}</td>
+        <td>{{item.created_at || '-'}}</td>
+        <td>{{item.response || '-'}}</td>
+
+        <td style = "color: rgb(13, 255, 0);" (click)="openSMSForm(smsForm, item)">SMS</td>
+        <td style = "color: rgb(255, 123, 0);" (click)="blockFeedback(item.id)">Закрыть обращение</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  
+</div>
+
+
+<ng-template #smsForm>
+  <div class="modal-header">
+    <div class="form-row">
+      <h5 class="modal-title pull-left">
+        <span>SMS</span>
+      </h5>
+    </div>
+  </div>
+  <div class="modal-body">
+    <div class="row" *ngIf="openedBrand">
+      <div class="col-12">
+        <label class="label">Кому: {{openedBrand.phone}}</label>
+      </div>
+      <div class="col-12">
+        <label class="label">Текст ответа</label>
+        <app-custom-input [value]="openedBrand.text" [placeholder]="'Text'" (change) = "setText($event)"></app-custom-input>
+      </div>
+      <div *ngIf="openedBrand && openedBrand.feedback_id && openedBrand.text" class="col-12 d-flex justify-content-end" style = "margin-top: 20px;">
+        <button class="btn btn-primary" (click)="sendSms()">Send SMS</button>
+      </div>
+    </div>
+  </div>
+</ng-template>
+

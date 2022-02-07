@@ -1,0 +1,14 @@
+<div class="custom-field-block my-custom-select" [ngClass]="{'opened': view.isView, 'error': error, 'not-label': !label}" *ngIf="showOptions">
+  <div class="custom-field-label" *ngIf="label">{{label}}</div>
+  <!--<div class="custom-field-over-label" *ngIf="!label && placeholder">{{placeholder}}</div>-->
+  <input type="text" class="custom-field show-value" name="custom-select-input" [(ngModel)]="showValue" [placeholder]="placeholder" [ngClass]="{'error': !valid.status && showError, 'select-placeholder': isPlaceholder}" (click)="toggleOptions(true)" (keyup)="search()" autocomplete="off"/>
+  <div class="custom-select-arrow" (click)="toggleOptions()"></div>
+  <div class="error-message" *ngIf="!valid.status && showError">{{valid.message}}</div>
+
+  <div class="select-options my-scroll">
+    <div class="select-option" *ngFor="let item of showOptions" (click)="setOption(item)">
+      {{getOptionShow(item)}}
+      <app-icon *ngIf="(!key && item === currentValue) && (key && item[key] === currentValue)" [name]="'check'" [color]="'#33A93F'"></app-icon>
+    </div>
+  </div>
+</div>

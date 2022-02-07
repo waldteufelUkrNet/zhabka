@@ -1,0 +1,19 @@
+<div class="row" *ngIf="countPages > 1">
+    <div class="col-12 d-flex justify-content-center">
+        <nav aria-label="myPagination">
+            <ul class="pagination">
+                <li class="page-item" [ngClass]="{'disabled': activePage == 1}" (click)="setPage(activePage - 1)">
+                    <a class="page-link">Предыдущая</a>
+                </li>
+                <li class="page-item" [ngClass]="{'active': item == activePage}" *ngFor="let item of pages">
+                    <a class="page-link" (click)="setPage(item)">
+                        {{item}}
+                    </a>
+                </li>
+                <li class="page-item" [ngClass]="{'disabled': activePage == countPages}">
+                    <a class="page-link" (click)="setPage(activePage + 1)">Следующая</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>

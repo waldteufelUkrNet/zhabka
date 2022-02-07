@@ -1,0 +1,27 @@
+<div class="custom-field-block" *ngIf="picker_type == 'timer'">
+  <div class="custom-field-over-label" *ngIf="placeholder">{{placeholder}}</div>
+  <input [owlDateTime]="dt1" [placeholder]="placeholder" class="custom-field" [ngClass]="{'error': !valid.status && showError}" [(ngModel)]="selectedTimer" (ngModelChange)="setOutputTimer()">
+  <span class="trigger custom-field-icon-right" [owlDateTimeTrigger]="dt1">
+      <i class="fa fa-calendar"></i>
+  </span>
+  <owl-date-time #dt1 [pickerType]="picker_type"></owl-date-time>
+  <div class="error-message" *ngIf="!valid.status && showError">{{valid.message}}</div>
+</div>
+<div class="custom-field-block" *ngIf="!picker_type">
+  <div class="custom-field-over-label" *ngIf="placeholder">{{placeholder}}</div>
+  <input [owlDateTime]="dt2"  class="custom-field" [ngClass]="{'error': !valid.status && showError}" [placeholder]="placeholder" [(ngModel)]="selectedDateTime" (ngModelChange)="setOutputDateTime()">
+  <span class="trigger custom-field-icon-right" [owlDateTimeTrigger]="dt2">
+      <i class="fa fa-calendar"></i>
+  </span>
+  <owl-date-time #dt2></owl-date-time>
+  <div class="error-message" *ngIf="!valid.status && showError">{{valid.message}}</div>
+</div>
+<div class="custom-field-block" *ngIf="picker_type == 'calendar'">
+  <div class="custom-field-over-label" *ngIf="placeholder">{{placeholder}}</div>
+  <input [owlDateTime]="dt3" [placeholder]="placeholder" class="custom-field" [ngClass]="{'error': !valid.status && showError}" [(ngModel)]="selectedCalendar" (ngModelChange)="setOutputCalendar()">
+  <span class="trigger custom-field-icon-right" [owlDateTimeTrigger]="dt3">
+      <i class="fa fa-calendar"></i>
+  </span>
+  <owl-date-time #dt3 [pickerType]="picker_type"></owl-date-time>
+  <div class="error-message" *ngIf="!valid.status && showError">{{valid.message}}</div>
+</div>
