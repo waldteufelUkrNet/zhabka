@@ -19,7 +19,7 @@ router.get('/send', function(req, res, next) {
   };
 
   let emailOptions = {
-    billType       : 'canceled', // not_paid / paid / partially_paid / canceled
+    billType       : 'partially_paid', // not_paid / paid / partially_paid / canceled
     billEndDate    : '04.02.2022 - 13:44',
     billNumber     : 'Wjhj873hjQ',
     userName       : 'Вернигородський-Синьовертий-Смазнов Едуард',

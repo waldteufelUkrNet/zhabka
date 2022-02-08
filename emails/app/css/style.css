@@ -230,6 +230,9 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: end;
+      -ms-flex-align: end;
+          align-items: flex-end;
 }
 .header__col:last-of-type {
   text-align: right;
@@ -246,6 +249,7 @@ body {
   font-weight: bold;
   line-height: 24px;
   margin-top: -10px;
+  padding-left: 5px;
 }
 .header__title {
   padding-top: 10px;
@@ -436,6 +440,7 @@ body {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
+  padding-right: 5px;
 }
 .pay-info__table-left-cell span {
   display: inline-block;
