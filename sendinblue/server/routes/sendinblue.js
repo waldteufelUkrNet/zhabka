@@ -13,7 +13,8 @@ router.get('/send', function(req, res, next) {
   let emailSettings = {
     senderEmail : 'waldteufel@ukr.net',
     senderName  : 'Жабка',
-    userEmail   : 'vadim405120@gmail.com',
+    userEmail   : 'zhabka.4ek@gmail.com',
+    // userEmail   : 'vadim405120@gmail.com',
     userName    : 'vadim',
   };
 
@@ -37,7 +38,7 @@ router.get('/send', function(req, res, next) {
 
   res.status(200).render('email.pug', emailOptions, function(err, html){
     if (err) throw err;
-
+// res.send(html);
     new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail(
       {
         'subject'     : emailOptions.subject,
@@ -48,6 +49,7 @@ router.get('/send', function(req, res, next) {
     )
     .then(res => {
       // do something if ok
+      console.log(res);
     })
     .catch(err => console.error(err));
 

@@ -1,9 +1,9 @@
 .pay-info {
   &__table {
     padding: 10px;
-    @media (min-width: 768px) {
-      padding: 54px 40px 27px 40px;
-    }
+    // @media (min-width: 768px) {
+    //   padding: 54px 40px 27px 40px;
+    // }
   }
   &__table-row {
     height: 50px;
@@ -42,6 +42,7 @@
   &__table-left-cell {
     display: flex;
     justify-content: flex-end;
+    padding-right: 5px;
     span {
       display: inline-block;
       padding-top: 10px;

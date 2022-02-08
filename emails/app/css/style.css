@@ -99,11 +99,6 @@ body {
 .customer-info {
   padding: 10px;
 }
-@media (min-width: 768px) {
-  .customer-info {
-    padding: 0px 40px;
-  }
-}
 .customer-info__row {
   min-height: 56px;
   margin-bottom: 4px;
@@ -164,11 +159,6 @@ body {
 .footer {
   padding: 10px;
   font: 10px sfptr;
-}
-@media (min-width: 768px) {
-  .footer {
-    padding: 56px 30px 10px;
-  }
 }
 .footer__text {
   line-height: 15px;
@@ -240,11 +230,6 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-}
-@media (min-width: 768px) {
-  .header {
-    padding: 40px 40px 27px 40px;
-  }
 }
 .header__col:last-of-type {
   text-align: right;
@@ -343,11 +328,6 @@ body {
 .pay-info {
   padding: 10px;
 }
-@media (min-width: 768px) {
-  .pay-info {
-    padding: 40px 40px 0 40px;
-  }
-}
 .pay-info__header {
   font: 18px sfptr;
   color: #263238;
@@ -413,11 +393,6 @@ body {
 
 .pay-info__table {
   padding: 10px;
-}
-@media (min-width: 768px) {
-  .pay-info__table {
-    padding: 54px 40px 27px 40px;
-  }
 }
 .pay-info__table-row {
   height: 50px;
