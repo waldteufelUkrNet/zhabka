@@ -20,7 +20,7 @@ router.get('/send', function(req, res, next) {
   };
 
   let emailOptions = {
-    billType       : 'partially_paid', // not_paid / paid / partially_paid / canceled
+    billType       : 'not_paid', // not_paid / paid / partially_paid / canceled
     billEndDate    : '04.02.2022 - 13:44',
     billNumber     : 'Wjhj873hjQ',
     userName       : 'Вернигородський-Синьовертий-Смазнов Едуард',
@@ -39,7 +39,7 @@ router.get('/send', function(req, res, next) {
 
   res.status(200).render('email.pug', emailOptions, function(err, html){
     if (err) throw err;
-// res.send(html);
+    // res.send(html);
     new SibApiV3Sdk.TransactionalEmailsApi().sendTransacEmail(
       {
         'subject'     : emailOptions.subject,
@@ -53,7 +53,6 @@ router.get('/send', function(req, res, next) {
       console.log(res);
     })
     .catch(err => console.error(err));
-
   });
 ////////////////////////////////////////////////////////////////////////////////
 });
