@@ -13,8 +13,9 @@ router.get('/send', function(req, res, next) {
   let emailSettings = {
     senderEmail : 'waldteufel@ukr.net',
     senderName  : 'Жабка',
-    userEmail   : 'zhabka.4ek@gmail.com',
-    // userEmail   : 'vadim405120@gmail.com',
+    // userEmail   : 'zhabka.4ek@gmail.com',
+    // userEmail   : 'nigatif1991@gmail.com',
+    userEmail   : 'vadim405120@gmail.com',
     userName    : 'vadim',
   };
 
