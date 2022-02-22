@@ -33,7 +33,7 @@ router.get('/send', function(req, res, next) {
     };
 
     let emailOptions = {
-      messageSubject : 'Заявка№' + result.id,
+      messageSubject : 'Заявка№' + result.data.id,
       messageNumber  : result.data.id,
       messageDate    : result.data.time,
       clientName     : 'Вася Пупкін',
