@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  p to send some email click the button
+  button#send(type="button") send email
+
+  script.
+    document.querySelector('#send').addEventListener('click', async function(e){
+      console.log('click on send');
+      let response = await fetch('http://localhost:3001/sendinblue/send');
+      if (response.status == 200) {
+        //- console.log('server answer: ', await response.text());
+        document.documentElement.innerHTML = await response.text()
+      }
+    });

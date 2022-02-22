@@ -1,0 +1,146 @@
+-
+  let consolaURL = staticFilesSrc + 'consola.ttf';
+  let consolabURL = staticFilesSrc + 'consolab.ttf';
+  let logoUrl = staticFilesSrc + 'logo.png';
+  let telHref = 'tel:' + clientPhone;
+
+doctype
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Заявка № #{messageNumber}
+    style.
+      html, body, div, span, applet, object, iframe,
+      h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+      a, abbr, acronym, address, big, cite, code,
+      del, dfn, em, img, ins, kbd, q, s, samp,
+      small, strike, strong, sub, sup, tt, var,
+      b, u, i, center,
+      dl, dt, dd, ol, ul, li,
+      fieldset, form, label, legend,
+      table, caption, tbody, tfoot, thead, tr, th, td,
+      article, aside, canvas, details, embed,
+      figure, figcaption, footer, header, hgroup,
+      menu, nav, output, ruby, section, summary,
+      time, mark, audio, video {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        font-size: 100%;
+        font: inherit;
+        vertical-align: baseline;
+      }
+
+      /* HTML5 display-role reset for older browsers */
+      article, aside, details, figcaption, figure,
+      footer, header, hgroup, menu, nav, section {
+        display: block;
+      }
+
+      body {
+        line-height: 1;
+      }
+
+      ol, ul {
+        list-style: none;
+      }
+
+      blockquote, q {
+        quotes: none;
+      }
+
+      blockquote:before, blockquote:after,
+      q:before, q:after {
+        content: "";
+        content: none;
+      }
+
+      table {
+        border-collapse: collapse;
+        border-spacing: 0;
+      }
+
+      * {
+        outline: none;
+      }
+
+      @font-face {
+        font-family: c;
+        src: url(#{consolaURL});
+      }
+      @font-face {
+        font-family: cb;
+        src: url(#{consolabURL});
+      }
+      * {
+        -webkit-box-sizing: border-box;
+                box-sizing: border-box;
+      }
+
+      .header__inner {
+        height: 60px;
+        max-width: 720px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 20px 10px;
+        background: url(#{logoUrl}) no-repeat left center;
+        border-bottom: 3px double #82BF64;
+        font: 1.2em cb;
+      }
+
+      main {
+        margin-top: 10px;
+      }
+
+      .letter-wrapper {
+        max-width: 720px;
+        margin: 0 auto;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#efefef), to(#fff));
+        background-image: -o-linear-gradient(#efefef, #fff);
+        background-image: linear-gradient(#efefef, #fff);
+        height: calc(100vh - 60px - 10px);
+      }
+      .letter-wrapper .letter-row {
+        border-bottom: 1px solid white;
+        padding: 0 10px;
+      }
+      .letter-wrapper label {
+        font: 1em cb;
+        display: inline-block;
+        width: 150px;
+        vertical-align: top;
+        height: 100%;
+        padding: 10px 0;
+      }
+      .letter-wrapper span {
+        font: 1em c;
+        display: inline-block;
+        width: calc(100% - 160px);
+        margin-left: 10px;
+        text-align: justify;
+        border-left: 1px solid white;
+        padding: 10px;
+      }
+
+  body
+    header.header
+      .header__inner
+        h1 Заявка №
+          |
+          |
+          span #{messageNumber}
+    main
+      .letter-wrapper
+        .letter-row
+          label Дата звернення:
+          span #{messageDate}
+        .letter-row
+          label Ім'я клієнта:
+          span #{clientName}
+        .letter-row
+          label Телефон клієнта:
+          span: a(href=telHref) #{clientPhone}
+        .letter-row
+          label Текст звернення:
+          span #{messageText}

@@ -1,0 +1,181 @@
+-
+  let headerModClass      = 'header',
+      headerTranscription = '',
+      userModClass        = 'customer-info__data_be',
+      billModClass        = 'customer-info__data_bk',
+      userBtnModClass     = 'main-btn__btn',
+      bill1SumDescription = 'Сплачено:',
+      bill2SumDescription = 'Очікує оплати:',
+      billBtnModClass     = 'main-btn__btn',
+      billBtnDescription  = 'Оплатити',
+      logoSrc             = staticFilesSrc + 'logo.png',
+      eSupportSrc         = staticFilesSrc + 'e-support.jpg',
+      // stylesHref          = staticFilesSrc + 'style.css?version=' + Math.random(),
+      // logoSrc             = 'https://zhabka-aw.4ek.cc/temp/logo.png',
+      // eSupportSrc         = 'https://zhabka-aw.4ek.cc/temp/e-support.jpg',
+      // stylesHref          = 'https://zhabka-aw.4ek.cc/temp/style.css?version=' + Math.random(),
+      phoneHref           = 'tel:' + userPhone,
+      btn1href            = userBtnHref,
+      btn2href            = billBtnHref;
+
+  if ( billType == 'not_paid' ) {
+    //
+  } else if ( billType == 'paid' ) {
+    headerTranscription = 'оплачено';
+    userBtnModClass = 'main-btn__btn main-btn__btn_success';
+    bill1SumDescription = 'Знижка:';
+    bill2SumDescription = 'Баланс:';
+    billBtnModClass     = 'main-btn__btn main-btn__btn_success';
+    billBtnDescription  = 'Квитанція';
+  } else if ( billType == 'partially_paid' ) {
+    headerTranscription = 'частково оплачено';
+  } else if ( billType == 'canceled' ) {
+    headerModClass = 'header header_canceled';
+    headerTranscription = 'скасовано';
+    userModClass = 'customer-info__data_bk';
+    billModClass = 'customer-info__data_r';
+    userBtnModClass = 'main-btn__btn main-btn__btn_error';
+    bill1SumDescription = 'Коштів повернуто:';
+    bill2SumDescription = 'Баланс:';
+    billBtnModClass     = 'main-btn__btn main-btn__btn_cancel';
+    billBtnDescription  = 'Скасовано';
+  }
+
+doctype
+html
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Bill
+    // link(rel="stylesheet" href=stylesHref)
+    style.
+      a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;border:0;font:inherit;vertical-align:baseline}body{line-height:1;max-width:720px;margin:0 auto}article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{display:block}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:after,blockquote:before,q:after,q:before{content:none}table{border-collapse:collapse;border-spacing:0}*{outline:0;-webkit-box-sizing:border-box;box-sizing:border-box}@font-face{font-family:"sfptl";font-style:normal;font-weight:100;src:url(https://zhabka-aw.4ek.cc/temp/SFProText-Light.ttf)}@font-face{font-family:"sfptr";font-style:normal;font-weight:500;src:url(https://zhabka-aw.4ek.cc/temp/SFProText-Regular.ttf)}@font-face{font-family:"sfptb";font-style:normal;font-weight:700;src:url(https://zhabka-aw.4ek.cc/temp/SFProText-Bold.ttf)}.margin{width:100%;height:70px}.btn-wrapper{height:100px;position:relative}.btn-wrapper>*{left:50%;-webkit-transform:translate(-50%,0);-ms-transform:translate(-50%,0);transform:translate(-50%,0)}.customer-info{padding:10px}.customer-info__row{min-height:56px;margin-bottom:4px}.customer-info__row_1col{background-color:#fafafa;padding:6px 12px}.customer-info__row_2col{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column}@media (min-width:625px){.customer-info__row_2col{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}}.customer-info__col{background-color:#fafafa;margin-right:4px;width:100%;padding:6px 12px}@media (min-width:625px){.customer-info__col{width:50%}}.customer-info__col_transparent{background-color:transparent;position:relative}.customer-info__title{font:18px sfptr;color:#666}.customer-info__data{font:18px sfptb}.customer-info__data_be{color:#007efc}.customer-info__data_bk{color:#263238}.customer-info__data_r{color:#ff6464}.footer{padding:10px;font:10px sfptr}.footer__text{line-height:15px;margin-bottom:15px}.footer__logo{width:40px;display:block;margin:47px auto 2px}.footer__menu{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:center;-ms-flex-pack:center;justify-content:center;padding-left:10px;padding-bottom:10px;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center}@media (min-width:360px){.footer__menu{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row;-webkit-box-align:start;-ms-flex-align:start;align-items:start}}.footer__menu-item a{font-weight:800}.footer__menu-item span{padding:0 6px}.footer__about{text-align:center;font-family:sfptb;padding-bottom:8px}.footer__about a,.footer__menu-item a{color:#007aff;text-decoration:underline}.footer__rights{text-align:center;padding-bottom:10px}.footer__rights:last-of-type{padding-top:8px}.header{padding:10px;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.header__col:last-of-type{text-align:right}.header__logo-img{padding-top:8px;padding-left:4px}.header__logo-name{color:#82bf64;font:20px sfptb;text-transform:uppercase;font-style:normal;font-weight:700;line-height:24px;margin-top:-10px;padding-left:5px}.header__title{padding-top:10px;font:48px sfptl;line-height:22px;color:#82bf64;letter-spacing:-2px}.header__transcription{font:20px sfptb;text-transform:uppercase;line-height:24px;color:#82bf64;padding-top:18px}.header_canceled .header__title,.header_canceled .header__transcription{color:#ff6464}.main-btn__wrapper{position:absolute;right:0;top:10px;width:267px}.main-btn__btn{width:267px;height:46px;border:1px solid #000;border-radius:6px;background-color:#000;color:#fff;font:20px sfptr;cursor:pointer;display:block;text-align:center;text-decoration:none;padding-top:10px}.main-btn__btn_success{border:1px solid #82bf64;background-color:#82bf64}.main-btn__btn_error{border:1px solid #ff6464;background-color:#ff6464}.main-btn__btn_cancel{border:1px solid #d8d8d8;background-color:#d8d8d8}.main-btn__additional{position:absolute;right:0;top:100%;display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:end;-ms-flex-align:end;align-items:flex-end}.main-btn__img{width:135px;margin:8px 0 2px}.main-btn__p{text-align:right;font:13px sfptr;color:#161616}.pay-info{padding:10px}.pay-info__header{font:18px sfptr;color:#263238;height:31px;background-color:#fafafa;padding:4px 12px}.pay-info__row{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:justify;-ms-flex-pack:justify;justify-content:space-between;margin-top:10px;-webkit-box-orient:vertical;-webkit-box-direction:normal;-ms-flex-direction:column;flex-direction:column;-webkit-box-align:center;-ms-flex-align:center;align-items:center}@media (min-width:500px){.pay-info__row{-webkit-box-orient:horizontal;-webkit-box-direction:normal;-ms-flex-direction:row;flex-direction:row}}.pay-info__logo{width:111px;height:111px;margin-left:5px}.pay-info__main{color:#161616;margin:0 35px}.pay-info__subheader{font:13px sfptb;line-height:16px;text-align:center;padding:10px 0}@media (min-width:500px){.pay-info__subheader{-moz-text-align-last:left;text-align-last:left;padding:0}}.pay-info__about{font:13px sfptr;line-height:16px}.pay-info__price{font:18px sfptb;min-width:100px;text-align:right}.pay-info__table{padding:10px}.pay-info__table-row{height:50px;display:-ms-grid;display:grid;-ms-grid-columns:auto auto;grid-template-columns:auto auto;font:18px sfptr;font-weight:800;border-top:1px solid #898a8d;border-bottom:1px solid #898a8d}@media (min-width:400px){.pay-info__table-row{-ms-grid-columns:auto 137px;grid-template-columns:auto 137px}}.pay-info__table-row .pay-info__table-right-cell{font:22px sfptb;border-left:1px solid #898a8d}.pay-info__table-row_header{border-top:1px solid transparent;border-bottom:1px solid transparent}.pay-info__table-row_header .pay-info__table-left-cell{font:18px sfptr;font-weight:300}.pay-info__table-row_header .pay-info__table-right-cell{font:18px sfptr;font-weight:800;border-left:1px solid transparent}.pay-info__table-left-cell{display:-webkit-box;display:-ms-flexbox;display:flex;-webkit-box-pack:end;-ms-flex-pack:end;justify-content:flex-end;padding-right:5px}.pay-info__table-left-cell span{display:inline-block;padding-top:10px}@media (min-width:400px){.pay-info__table-left-cell span{width:180px}}.pay-info__table-left-cell span:last-of-type{padding-top:14px}.pay-info__table-right-cell{text-align:right;padding-right:5px;padding-top:10px}
+    style.
+      @font-face{font-family:"sfptl";font-style:normal;font-weight:100;src:url(https://zhabka-aw.4ek.cc/temp/SFProText-Light.ttf)}
+      @font-face{font-family:"sfptr";font-style:normal;font-weight:500;src:url(https://zhabka-aw.4ek.cc/temp/SFProText-Regular.ttf)}
+      @font-face{font-family:"sfptb";font-style:normal;font-weight:700;src:url(https://zhabka-aw.4ek.cc/temp/SFProText-Bold.ttf)}
+
+      .customer-info__row_2col{
+        display: block;
+      }
+      .customer-info__col {
+        width: 100%;
+      }
+      .pay-info__row {
+        display: block;
+      }
+      .pay-info__logo {
+        margin: 0 auto;
+        display: block;
+      }
+      .pay-info__price {
+        text-align: center;
+      }
+      @media (min-width: 525px) {
+        .customer-info__row_2col {
+          display: flex;
+        }
+        .customer-info__col {
+          width: 50%;
+        }
+        .pay-info__row {
+          display: flex;
+          flex-ditection: row;
+        }
+        .pay-info__logo {
+          margin: 0;
+        }
+        .pay-info__price {
+          text-align: right;
+        }
+      }
+  body(style="max-width: 720px;")
+    div(class=headerModClass style="padding: 10px; display: flex;")
+      .header__col(style="width: 90px;")
+        img.header__logo-img(alt="logo" src=logoSrc style="padding-top: 8px; padding-left: 4px;")
+        .header__logo-name(style="color: #82BF64; font: 20px sfptb; text-transform: uppercase; font-style: normal; font-weight: bold; line-height: 24px; margin-top: -10px; padding-left: 5px;") жабка
+      .header__col(style="text-align: right; width: calc(100% - 90px);")
+        if headerTranscription == ''
+          h1.header__title(style="vertical-align: bottom; font: 48px sfptl; color: #82BF64; letter-spacing: -2px; height: 100%; line-height: auto; padding-top: 48px") Рaхунок
+        else
+          h1.header__title(style="vertical-align: bottom; padding-top: 10px; font: 48px sfptl; line-height: 22px; color: #82BF64; letter-spacing: -2px; line-height: auto; padding-top: 34px") Рaхунок
+          h2.header__transcription(style="vertical-align: bottom; font: 20px sfptb; text-transform: uppercase; line-height: 24px; color: #82BF64; padding-top: 18px;") #{headerTranscription}
+    main
+      .customer-info
+        .customer-info__row.customer-info__row_1col
+          .customer-info__title Виписаний на покупця:
+          .customer-info__data(class=userModClass) #{userName}
+        .customer-info__row.customer-info__row_2col
+          .customer-info__col
+            .customer-info__title Кінцева дата оплати:
+            .customer-info__data(class=billModClass) #{billEndDate}
+          .customer-info__col
+            .customer-info__title Номер рахунку
+            .customer-info__data(class=billModClass) #{billNumber}
+        .customer-info__row.customer-info__row_2col
+          .customer-info__col
+            .customer-info__title Контакти покупця:
+            a.customer-info__data(class=userModClass href=phoneHref style="text-decoration:none") #{userPhone}
+          .customer-info__col.customer-info__col_transparent
+            .main-btn__wrapper(style="margin-left: auto")
+              a(class=userBtnModClass href=btn1href style="color:white") Переглянути
+              .main-btn__additional
+                img.main-btn__img(alt="support" src=eSupportSrc)
+                p.main-btn__p *одна покупка різними картками
+      .margin
+      .pay-info
+        h3.pay-info__header Рахунок на оплату:
+        .pay-info__row
+          img.pay-info__logo(alt="pay logo" src=billImgSrc)
+          .pay-info__main
+            h4.pay-info__subheader #{billHeader}
+            .pay-info__about #{billDescription}
+          .pay-info__price #{billPrice}
+      .pay-info__table(style="padding: 10px;")
+        .pay-info__table-row.pay-info__table-row_header(style="height: 50px;display: flex; font: 18px sfptr;font-weight: 800;")
+          .pay-info__table-left-cell(style="width:calc(100% - 175px); display: inline-block;")
+            span(style="width:180px; padding=right: 10px;") #{bill1SumDescription}
+          .pay-info__table-right-cell(style="width:137px; text-align: right; display: inline-block;")
+            span #{bill1Sum}
+        .pay-info__table-row(style="height: 50px;display: flex; font: 18px sfptr;font-weight: 800;")
+          .pay-info__table-left-cell(style="width:calc(100% - 175px); display: inline-block;")
+            span(style="width:180px; padding=right: 10px;") #{bill2SumDescription}
+          .pay-info__table-right-cell(style="width:137px; text-align: right; display: inline-block;")
+            span #{bill2Sum}
+      .btn-wrapper
+        .main-btn__wrapper(style="margin: 10px auto")
+          a(class=billBtnModClass href=btn1href style="color:white") #{billBtnDescription}
+          .main-btn__additional
+            img.main-btn__img(alt="support" src=eSupportSrc)
+            p.main-btn__p *одна покупка різними картками
+      .footer
+        p.footer__text *Що таке оплата різними картками? Ви можете поділити вартість замовлення на кілька частин. Оплата замовлення повністю або його частини можлива карткою еПідтримка.
+        p.footer__text Наприклад, вартість квитка 1300грн. Ви можете розділити його на три частини: 1000грн з картки еПідтримка, 250грн з іншої карти еПідтримка, та 50 грн карткою Вашого банку.
+        p.footer__text Важливо: у Вас є дві доби на оплату різними картами. Якщо повна вартість Вашого замовлення не буде покрита, гроші автоматично повертаються на Ваші рахунки. Ви завжди можете повернутися на сторінку оплати різними картами з цього посилання, яке Ви отримали на Ваш email.
+
+        img.footer__logo(alt="logo" src=logoSrc)
+
+        .footer__menu
+          .wrapper(style="display: inline-flex; margin: 0 auto;")
+            .footer__menu-item
+              a(href="https://zhabka.in.ua/") Про Жабку
+              span 🐸
+            .footer__menu-item
+              a(href="https://zhabka.in.ua/") Карткові платежі
+              span 🤑
+            .footer__menu-item
+              a(href="https://zhabka.in.ua/") Для бізнесу
+              span 🚀
+
+        .footer__about
+          a(href="https://zhabka.in.ua/") Жабка
+          |
+          |
+          span - перший в Україні крос-платформений платіжний сервіс для фізичних осіб та бізнесу
+
+        p.footer__rights Загартовано ФОПами для ФОПів
+        p.footer__rights © All Rights Reserved. 4ek LLC.
+        //- p.footer__rights Ви отримали цей лист, тому що є клієнтом нашого сервісу. Якщо ви не хочете більше отримувати наші листи
+        //-   |
+        //-   |
+        //-   a(href="#") натисниіть сюди

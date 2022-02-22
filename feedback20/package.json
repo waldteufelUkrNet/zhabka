@@ -1,0 +1,41 @@
+{
+  "name": "prro_add_transaction",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "apple-pay-decrypt": "^1.0.8",
+    "axios": "^0.21.1",
+    "bignumber": "^1.1.0",
+    "core-util-is": "^1.0.2",
+    "crypto-random-string": "^3.3.1",
+    "fast-xml-parser": "^3.19.0",
+    "follow-redirects": "^1.13.2",
+    "fs": "0.0.1-security",
+    "https": "^1.0.0",
+    "inherits": "^2.0.4",
+    "isarray": "^2.0.5",
+    "jsonwebtoken": "^8.5.1",
+    "messaging-api-viber": "^1.0.4",
+    "microtime": "^3.0.0",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.33",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.15",
+    "path": "^0.12.7",
+    "process-nextick-args": "^2.0.1",
+    "readable-stream": "^3.6.0",
+    "safe-buffer": "^5.2.1",
+    "sha3": "^2.1.4",
+    "sqlstring": "^2.3.2",
+    "string_decoder": "^1.3.0",
+    "type-fest": "^0.21.2",
+    "util-deprecate": "^1.0.2"
+  }
+}

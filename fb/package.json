@@ -1,0 +1,31 @@
+{
+  "name": "nigatif",
+  "version": "0.0.0",
+  "description": "bitmedia",
+  "main": "server/app.js",
+  "scripts": {
+    "start": "nodemon server/app.js"
+  },
+  "author": "waldteufel",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "chalk": "^3.0.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^14.3.2",
+    "express": "~4.16.1",
+    "http-errors": "~1.6.3",
+    "moment-timezone": "^0.5.33",
+    "morgan": "~1.9.1",
+    "mysql": "^2.18.1",
+    "pug": "^2.0.4",
+    "sib-api-v3-sdk": "^8.2.1"
+  },
+  "devDependencies": {
+    "@babel/eslint-parser": "^7.16.5",
+    "eslint": "^8.7.0",
+    "eslint-plugin-node": "^11.1.0",
+    "nodemon": "^2.0.15",
+    "pug-lint": "^2.6.0"
+  }
+}

@@ -1,0 +1,50 @@
+@import "scss-snippets/reset";
+@import "scss-snippets/fonts";
+@import "scss-snippets/general";
+
+body {}
+
+.header {
+  &__inner {
+    height: 60px;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+    padding: 20px 10px;
+    background: url('../img/logo.png') no-repeat left center;
+    border-bottom: 3px double #82BF64;
+    font: 1.2em cb;
+  }
+}
+
+main {
+  margin-top: 10px;
+}
+
+.letter-wrapper {
+  max-width: 720px;
+  margin: 0 auto;
+  background-image: linear-gradient(#efefef, #fff);
+  height: calc(100vh - 60px - 10px);
+  .letter-row {
+    border-bottom: 1px solid white;
+    padding: 0 10px;
+  }
+  label {
+    font: 1em cb;
+    display: inline-block;
+    width: 150px;
+    vertical-align: top;
+    height: 100%;
+    padding: 10px 0;
+  }
+  span {
+    font: 1em c;
+    display: inline-block;
+    width: calc(100% - 160px);
+    margin-left: 10px;
+    text-align: justify;
+    border-left: 1px solid white;
+    padding: 10px;
+  }
+}
